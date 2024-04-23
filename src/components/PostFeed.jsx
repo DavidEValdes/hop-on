@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { supabase } from '../supabaseClient';
 import { useNavigate } from 'react-router-dom';
 
-
 function PostFeed() {
     const [posts, setPosts] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [sortBy, setSortBy] = useState('created_at');
+    const [loading, setLoading] = useState(true); 
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -14,14 +14,24 @@ function PostFeed() {
     }, [sortBy, searchTerm]);
 
     const fetchPosts = async () => {
-        const { data, error } = await supabase
-            .from('posts')
-            .select('*')
-            .ilike('title', `%${searchTerm}%`)
-            .order(sortBy, { ascending: false });
+        setLoading(true); 
+        try {
+            const { data, error } = await supabase
+                .from('posts')
+                .select('*')
+                .ilike('title', `%${searchTerm}%`)
+                .order(sortBy, { ascending: false });
 
-        if (error) console.error('Error fetching posts:', error);
-        else setPosts(data);
+            if (error) {
+                console.error('Error fetching posts:', error);
+            } else {
+                setPosts(data);
+            }
+        } catch (error) {
+            console.error('Error during data fetching', error);
+        } finally {
+            setLoading(false); 
+        }
     };
 
     const handleCreatePost = () => {
@@ -36,6 +46,10 @@ function PostFeed() {
         setSortBy(event.target.value);
     };
 
+    if (loading) {
+        return <h2>Loading...</h2>; 
+    }
+
     return (
         <div className="feedContainer">
             <div className="toolbar">
@@ -46,7 +60,7 @@ function PostFeed() {
                 </select>
                 <button onClick={handleCreatePost} className="createButton">Create Post</button>
             </div>
-            {posts.length === 0 ? <div>No posts found.</div> : 
+            {posts.length === 0 ? <div>No posts found.</div> :
                 posts.map(post => (
                     <div key={post.id} className="postCard" onClick={() => navigate(`/posts/${post.id}`)}>
                         <h3 className="postTitle">{post.title}</h3>
@@ -54,8 +68,8 @@ function PostFeed() {
                         <p className="postContent">{post.content}</p>
                         <small className="postGame">Game: {post.game}</small>
                         <div className="postMeta">
-                        <span>Created at: {new Date(post.created_at).toLocaleString()}</span>
-                        <p>Upvotes: {post.upvotes}</p>
+                            <span>Created at: {new Date(post.created_at).toLocaleString()}</span>
+                            <p>Upvotes: {post.upvotes}</p>
                         </div>
                     </div>
                 ))

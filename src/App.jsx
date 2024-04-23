@@ -5,7 +5,9 @@ import PostFeed from './components/PostFeed';
 import PostPage from './components/PostPage';
 import EditPost from './components/EditPost';
 import Layout from './routes/Layout';
+import GamesPage from'./components/GamesPage';
 import './App.css';
+
 
 function App() {
   return (
@@ -17,7 +19,8 @@ function App() {
                       <Route path="create" element={<CreatePost />} />
                       <Route path="posts/:postId" element={<PostPage />} />
                       <Route path="edit/:postId" element={<EditPost />} />
-                  </Route>  // This closing tag was missing
+                      <Route path="games" element={<GamesPage />} /> 
+                  </Route>  
               </Routes>
           </Router>
       </div>

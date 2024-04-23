@@ -17,7 +17,7 @@ const SideBar = () => {
             </Link>
           </ul>
           <ul className="Menu-item">
-            <Link to="/" className="menu-link">
+            <Link to="games" className="menu-link">
               <div>🕹️ Games</div>
             </Link>
           </ul>

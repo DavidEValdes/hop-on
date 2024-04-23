@@ -25,7 +25,7 @@ function PostPage() {
         else setPost(data);
     };
 
-    if (!post) return <div>Loading...</div>;  
+    if (!post) return <h2>Loading...</h2>;  
 
     const handleDelete = async () => {
     try {
