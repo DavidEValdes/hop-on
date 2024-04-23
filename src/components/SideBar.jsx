@@ -22,7 +22,7 @@ const SideBar = () => {
             </Link>
           </ul>
           <ul className="Menu-item">
-            <Link to="/" className="menu-link">
+            <Link to="about" className="menu-link">
               <div>ℹ️ About</div>
             </Link>
           </ul>
