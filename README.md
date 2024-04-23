@@ -17,7 +17,7 @@ The following **required** functionality is completed:
 - [X] **Clicking on a post shall direct the user to a new page for the selected post**
 - [X] **Users can sort posts by either their created time or upvotes count**
 - [X] **Users can search for posts by title** 
-- [] **A separate post page for each created post, where any additional information is shown is linked whenever a user clicks a post**
+- [X] **A separate post page for each created post, where any additional information is shown is linked whenever a user clicks a post**
 - [X] **Users can leave comments underneath a post on the post's separate page**
 - [X] **Each post should have an upvote button on the post's page. Each click increases its upvotes count by one and users can upvote any number of times**
 - [X] **A previously created post can be edited or deleted from its post page**
