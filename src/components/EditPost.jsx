@@ -1,4 +1,3 @@
-// src/components/EditPost.js
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
@@ -47,8 +46,11 @@ function EditPost() {
     return (
         <form onSubmit={handleSubmit}>
             <input type="text" name="title" placeholder="Title" value={post.title} onChange={handleChange} required />
+            <br></br>
             <textarea name="content" placeholder="Content" value={post.content} onChange={handleChange} />
+            <br></br>
             <input type="text" name="game" placeholder="Game" value={post.game} onChange={handleChange} required />
+            <br></br>
             <button type="submit">Update Post</button>
         </form>
     );

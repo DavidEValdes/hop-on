@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
 
 function CommentsSection({ postId }) {
-    const [, forceUpdate] = useReducer(x => x + 1, 0); // simple counter to force render
     const [comments, setComments] = useState([]);
     const [commentText, setCommentText] = useState('');
 
@@ -14,8 +13,9 @@ function CommentsSection({ postId }) {
         const { data, error } = await supabase
             .from('comments')
             .select('*')
-            .eq('post_id', postId);
-
+            .eq('post_id', postId)
+            .order('created_at', { ascending: false });
+    
         if (error) console.error('Error fetching comments', error);
         else setComments(data);
     };
@@ -24,39 +24,31 @@ function CommentsSection({ postId }) {
         e.preventDefault();
         if (!commentText.trim()) return;
     
-        const newComment = { post_id: postId, text: commentText };
-    
-        // Optimistically update UI
-        setComments(currentComments => [...currentComments, { ...newComment, id: Date.now() }]);
+        const newComment = { 
+            post_id: postId, 
+            text: commentText,
+            created_at: new Date().toISOString() 
+        };
+        
+        setComments(currentComments => [{ ...newComment, id: Date.now() }, ...currentComments]);
         setCommentText('');
-    
-        // Attempt to insert the comment into the database
-        const { data, error } = await supabase
-            .from('comments')
-            .insert([newComment]);
-    
+        
+        const { data, error } = await supabase.from('comments').insert([newComment]);
         if (error) {
             console.error('Error adding comment', error);
-            // Rollback the optimistic update
+            
             setComments(currentComments => currentComments.filter(comment => comment.id !== Date.now()));
         } else {
-            // Correctly replace the temporary ID with the real one from the database
-            setComments(currentComments => {
-                return currentComments.map(comment =>
-                    comment.id === Date.now() ? { ...comment, id: data[0].id } : comment
-                );
-            });
+            
+            setComments(currentComments => currentComments.map(comment =>
+                comment.id === Date.now() ? { ...comment, id: data[0].id } : comment
+            ));
         }
     };
 
     return (
         <div>
             <h3>Comments</h3>
-            {comments.map(comment => (
-                <div key={comment.id}>
-                    <p>{comment.text}</p>
-                </div>
-            ))}
             <form onSubmit={handleAddComment}>
                 <textarea
                     value={commentText}
@@ -66,6 +58,13 @@ function CommentsSection({ postId }) {
                 ></textarea>
                 <button type="submit">Post Comment</button>
             </form>
+            {comments.map(comment => (
+                <div key={comment.id}>
+                    <p>{comment.text}</p>
+                    <small>Posted on: {new Date(comment.created_at).toLocaleString()}</small>
+                </div>
+            ))}
+            
         </div>
     );
 }

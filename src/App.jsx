@@ -1,9 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import PostForm from './components/PostForm';
+import CreatePost from './components/CreatePost';
 import PostFeed from './components/PostFeed';
 import PostPage from './components/PostPage';
 import EditPost from './components/EditPost';
+import Layout from './routes/Layout';
 import './App.css';
 
 function App() {
@@ -11,10 +12,12 @@ function App() {
       <div className="appContainer">  
           <Router>
               <Routes>
-                  <Route path="/" element={<PostFeed />} />
-                  <Route path="/create" element={<PostForm />} />
-                  <Route path="/posts/:postId" element={<PostPage />} />
-                  <Route path="/edit/:postId" element={<EditPost />} /> 
+                  <Route path="/" element={<Layout />}>
+                      <Route index element={<PostFeed />} />
+                      <Route path="create" element={<CreatePost />} />
+                      <Route path="posts/:postId" element={<PostPage />} />
+                      <Route path="edit/:postId" element={<EditPost />} />
+                  </Route>  // This closing tag was missing
               </Routes>
           </Router>
       </div>

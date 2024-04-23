@@ -1,4 +1,3 @@
-// src/components/PostFeed.js
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../supabaseClient';
 import { useNavigate } from 'react-router-dom';
@@ -12,7 +11,7 @@ function PostFeed() {
 
     useEffect(() => {
         fetchPosts();
-    }, [sortBy]);
+    }, [sortBy, searchTerm]);
 
     const fetchPosts = async () => {
         const { data, error } = await supabase
@@ -31,7 +30,6 @@ function PostFeed() {
 
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value);
-        fetchPosts();
     };
 
     const handleSortChange = (event) => {
@@ -56,8 +54,8 @@ function PostFeed() {
                         <p className="postContent">{post.content}</p>
                         <small className="postGame">Game: {post.game}</small>
                         <div className="postMeta">
-                            <span>Created at: {new Date(post.created_at).toLocaleDateString()}</span>
-                            <button className="upvoteButton">Upvote {post.upvotes}</button>
+                        <span>Created at: {new Date(post.created_at).toLocaleString()}</span>
+                        <p>Upvotes: {post.upvotes}</p>
                         </div>
                     </div>
                 ))
