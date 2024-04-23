@@ -29,7 +29,7 @@ const GameDetailPage = () => {
   }
 
   return (
-    <div>
+    <div className = "detail-page">
       <h1>{game.name}</h1>
       <img src={game.background_image} alt={game.name} style={{ width: '100%' }} />
       <p><strong>Released:</strong> {game.released}</p>

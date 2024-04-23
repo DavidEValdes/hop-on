@@ -148,6 +148,13 @@ body {
   text-overflow: ellipsis;
 }
 
+.post-page{
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.15) 100%);
+  padding: 20px; /* Adds padding around the content for better spacing */
+  margin-top: 20px; /* Optional: Adds spacing above the list */
+  border-radius: var(--border-radius); 
+}
+
 .upvoteButton {
   background-color: var(--accent-color); 
   color: var(--primary-color);
@@ -233,6 +240,10 @@ button, .menu-link {
   width: 100%;
   list-style: none;
   padding: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.15) 100%);
+  padding: 20px; /* Adds padding around the content for better spacing */
+  margin-top: 20px; /* Optional: Adds spacing above the list */
+  border-radius: var(--border-radius); 
 }
 
 /* Individual Game Card Styling */
@@ -257,7 +268,7 @@ button, .menu-link {
 /* Styling for Game Images */
 .gameImage {
   width: 100%;
-  height: auto;
+  height: 200px; /* Sets a fixed height for all images */
   border-radius: 8px;
   object-fit: cover;
 }
@@ -308,8 +319,10 @@ button, .menu-link {
 
 .pagination {
   display: flex;
+  align-items: center; /* This ensures all items in the flex container align vertically at the center */
   justify-content: center;
   margin-top: 20px;
+  padding: 10px 0; /* Adds padding above and below the pagination for better spacing */
 }
 
 .pagination button {
@@ -323,11 +336,10 @@ button, .menu-link {
   transition: background-color 0.3s;
 }
 
-.pagination button:hover {
-  background-color: var(--secondary-color);
-}
 
-.pagination button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+.detail-page{
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.15) 100%);
+  padding: 20px; /* Adds padding around the content for better spacing */
+  margin-top: 20px; /* Optional: Adds spacing above the list */
+  border-radius: var(--border-radius); 
 }

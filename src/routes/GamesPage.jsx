@@ -9,8 +9,9 @@ const GamesPage = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOrder, setSortOrder] = useState('rating');
-  const [pageSize, setPageSize] = useState(20); 
-  const [currentPage, setCurrentPage] = useState(1); 
+  const [pageSize, setPageSize] = useState(20);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalGames, setTotalGames] = useState(0);
 
   useEffect(() => {
     const fetchGames = async () => {
@@ -23,10 +24,11 @@ const GamesPage = () => {
             search: searchTerm,
             ordering: sortOrder === 'rating' ? '-rating' : '-released',
             page_size: pageSize,
-            page: currentPage 
+            page: currentPage
           }
         });
         setGames(response.data.results);
+        setTotalGames(response.data.count);
       } catch (error) {
         console.error('Error fetching games:', error);
       } finally {
@@ -35,7 +37,7 @@ const GamesPage = () => {
     };
 
     fetchGames();
-  }, [searchTerm, sortOrder, pageSize, currentPage]); 
+  }, [searchTerm, sortOrder, pageSize, currentPage]);
 
   const handlePreviousPage = () => {
     setCurrentPage(currentPage > 1 ? currentPage - 1 : 1);
@@ -48,6 +50,7 @@ const GamesPage = () => {
   return (
     <div className="gamesContainer">
       <h1 className="gamesTitle">All Co-Op Games</h1>
+      <div>
       <input
         type="text"
         placeholder="Search games..."
@@ -73,14 +76,17 @@ const GamesPage = () => {
         <option value="50">50 Games</option>
         <option value="100">100 Games</option>
       </select>
+      </div>
       {loading ? (
         <h2>Loading...</h2>
+      ) : games.length === 0 ? (
+        <div>No games found. Please adjust your search or filter settings.</div>
       ) : (
         <>
-         <div className="pagination">
-            <button onClick={handlePreviousPage} disabled={currentPage === 1}>←</button>
-            <span>Page {currentPage}</span>
-            <button onClick={handleNextPage}>→</button>
+          <div className="pagination">
+            <button onClick={handlePreviousPage} disabled={currentPage <= 1}>←</button>
+            <span>Page {currentPage} of {Math.ceil(totalGames / pageSize)}</span>
+            <button onClick={handleNextPage} disabled={currentPage >= Math.ceil(totalGames / pageSize)}>→</button>
           </div>
           <ul className="gamesList">
             {games.map(game => (
@@ -94,9 +100,9 @@ const GamesPage = () => {
             ))}
           </ul>
           <div className="pagination">
-            <button onClick={handlePreviousPage} disabled={currentPage === 1}>←</button>
-            <span>Page {currentPage}</span>
-            <button onClick={handleNextPage}>→</button>
+            <button onClick={handlePreviousPage} disabled={currentPage <= 1}>←</button>
+            <span>Page {currentPage} of {Math.ceil(totalGames / pageSize)}</span>
+            <button onClick={handleNextPage} disabled={currentPage >= Math.ceil(totalGames / pageSize)}>→</button>
           </div>
         </>
       )}
