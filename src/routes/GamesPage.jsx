@@ -97,8 +97,8 @@ const GamesPage = () => {
         <img src={game.background_image} alt={game.name} className="gameImage" />
         <h3 className = "gameTitle">{game.name}</h3>
         <div className="gameDetails">
-          <div className="gameRating">Rating: {game.rating}</div>
-          <div className="gameReleased">Released: {game.released || <span className="noReleaseDate">N/A</span>}</div>
+          <div className="gameRating">Rating: {game.rating || <span className="notAvailable">N/A</span>}</div>
+          <div className="gameReleased">Released: {game.released || <span className="notAvailable">N/A</span>}</div>
         </div>
       </Link>
     </li>

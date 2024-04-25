@@ -125,6 +125,9 @@ body {
 }
 
 .postCard {
+  display: flex;
+  justify-content: space-between; /* Align children to the sides */
+  align-items: start; /* Align items to the top */
   background: #fff;
   color: #000;
   box-shadow: var(--shadow-light);
@@ -137,23 +140,77 @@ body {
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
+.postDetails {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Takes up the remaining space after the image */
+  padding-right: 20px; /* Adds spacing between the text and the image */
+}
+
+.postHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: start; /* Align items to the left */
+  margin-top: -15px;
+}
+
+.postGame {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1.5rem; /* Larger font size for emphasis */
+  font-weight: bold; /* Make the text bold for better visibility */
+  color: #000000; /* Use a distinct color that matches your theme */
+  padding: 5px 0; /* Add some padding for better spacing around the text */
+  margin-bottom: 10px; /* Extra space below the game title */
+  background-color: rgba(255, 255, 255, 0); /* Light background for better contrast */
+  border-radius: 5px; /* Rounded corners for a softer look */
+  box-shadow: 0 5px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  width: 100%; /* Ensure it spans the full width of the card */
+  box-sizing: border-box; /* Include padding and border in the element's total width */
+}
+
 .postCard:hover {
   transform: translateY(-5px);
   box-shadow: var(--shadow-heavy);
 }
 
-.postTitle, .postContent, .postGame {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.postImage {
+  width: 100px;
+  height: 100px;
+  object-fit: cover; /* Ensures the image covers the designated area without distortion */
+  border-radius: var(--border-radius);
+  align-self: flex-start; /* Aligns the image to the top of the container */
 }
 
-.post-page{
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.15) 100%);
-  padding: 20px; /* Adds padding around the content for better spacing */
-  margin-top: 20px; /* Optional: Adds spacing above the list */
-  border-radius: var(--border-radius); 
+
+.post-image {
+  width: 100%; /* Full width to fill the container */
+  max-width: 400px; /* Maximum width to avoid overly large images */
+  height: auto; /* Height automatically adjusted to maintain aspect ratio */
+  object-fit: cover; /* Cover the container without distorting the image */
+  border-radius: var(--border-radius); /* Rounded corners for aesthetics */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  margin-bottom: 20px; /* Space below the image */
 }
+
+
+.post-page {
+  background: var(--background-color);
+  color: var(--text-color);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light);
+  margin: 20px auto;  /* Ensures consistent vertical margins and centers horizontally */
+  width: calc(100% - 40px); /* Ensure the width calculation accounts for margins correctly */
+  max-width: 800px; /* Ensures the element does not exceed this width */
+  box-sizing: border-box; /* Includes padding and borders in the element's total width */
+  overflow-x: hidden; /* Prevents horizontal overflow */
+  overflow-wrap: break-word; /* Ensures words do not break the layout */
+}
+
 
 .upvoteButton {
   background-color: var(--accent-color); 
@@ -320,7 +377,7 @@ button, .menu-link {
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Increased shadow on hover for depth */
 }
 
-.noReleaseDate {
+.notAvailable{
   font-style: italic;
   color: #bbbbbb; /* Lighter text for 'N/A' to indicate less importance */
 }
@@ -446,14 +503,21 @@ button, .menu-link {
   }
 }
 
-
-
-
-
-
-
-
-
+.post-content {
+  font-size: 1rem; /* Comfortable reading size */
+  color: #ffffff; /* Dark grey for readability */
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%); /* Very light gradient from more to less transparent */
+  padding: 10px 20px; /* Padding around the text */
+  margin: 20px auto; /* Auto margins for horizontal centering */
+  border-radius: 50px; /* Large border radius to create an oval shape */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  line-height: 1.6; /* Line spacing for better readability */
+  box-sizing: border-box; /* Includes padding and border in element size calculations */
+  max-width: 80%; /* Limits width to maintain layout integrity */
+  word-wrap: break-word; /* Prevents long words from overflowing */
+  text-align: center; /* Centers the text within the oval */
+  display: block; /* Ensures the element is treated as a block for centering */
+}
 
 
 
@@ -577,3 +641,133 @@ h1 {
   background-color: var(--hover-color);
 }
 
+
+
+
+
+
+.comments-container {
+  width: 100%;
+  max-width: 700px;
+  padding: 20px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: transparent; /* Example background for isolation */
+  border-radius: 10px;
+  overflow-x: hidden; /* Hides horizontal overflow */
+  box-sizing: border-box; /* Includes padding in the width calculation */
+}
+
+.comments-comment {
+  background-color: var(--primary-color); /* Ensures isolation with namespace */
+  padding: 10px 15px;
+  margin: 5px 0;
+  border-radius: 20px;
+  box-shadow: var(--shadow-light);
+  color: var(--background-color);
+  position: relative;
+  box-sizing: border-box; /* Ensures padding does not add to the width */
+}
+
+.comments-comment::after {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 50%;
+  left: -10px;
+  border-style: solid;
+  border-width: 10px 10px 10px 0;
+  border-color: transparent var(--primary-color) transparent transparent;
+  transform: translateY(-50%);
+}
+
+.comments-text {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.comments-meta {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.comments-textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+}
+
+.comments-button {
+  padding: 10px 20px;
+  background-color: var(--accent-color);
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.comments-button:hover {
+  background-color: var(--hover-color);
+}
+
+.comments-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.createButton {
+  border: 2px solid var(--accent-color); /* Light blue border */
+  border-radius: var(--border-radius); /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+}
+
+
+
+
+
+@media (max-width: 720px) {
+  .postCard {
+    flex-direction: column; /* Stack elements vertically on smaller screens */
+  }
+
+  .postImage {
+    width: 100%; /* Full width images on small screens */
+    height: auto; /* Maintain aspect ratio */
+    margin-top: 10px; /* Space between text and image */
+  }
+}
+
+
+
+@media (max-width: 720px) {
+  .postCard {
+    flex-direction: column; /* Stack elements vertically on smaller screens */
+  }
+
+  .postImage {
+    width: 100%; /* Full width images on small screens */
+    height: auto; /* Maintain aspect ratio */
+    margin-top: 10px; /* Space between text and image */
+  }
+
+  .postDetails {
+    order: 2; /* Text content goes below the image */
+  }
+
+  .postHeader {
+    flex-direction: row; /* Align game and title in a row on smaller screens */
+  }
+}
+
+.post-game{
+  font-size:2.0rem;
+}
