@@ -78,7 +78,7 @@ function PostFeed() {
                             <h4 className="postGame">{post.game}</h4>
                             <p className="postContent">{post.content}</p>
                             <div className="postMeta">
-                                <span>Created at: {new Date(post.created_at).toLocaleString()} @{post.display_time}</span>
+                            <span>Created at: {new Date(post.created_at).toLocaleString()} @{post.display_time}</span>
                                 <p>Upvotes: {post.upvotes}</p>
                             </div>
                         </div>

@@ -14,6 +14,7 @@ const CreatePost = () => {
     const [loading, setLoading] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedGame, setSelectedGame] = useState('');  // To display the selected game
+    const [selectedTime, setSelectedTime] = useState('');  // State to hold the selected time
     const navigate = useNavigate();
 
     const fetchGames = async () => {
@@ -55,9 +56,34 @@ const CreatePost = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+    
+        // Convert selectedTime to 12-hour format with AM/PM indicator
+        const timeParts = selectedTime.split(':');
+        let hours = parseInt(timeParts[0], 10);
+        let minutes = parseInt(timeParts[1], 10);
+        let ampm = 'AM';
+        
+        if (hours === 0) {
+            hours = 12;
+        } else if (hours > 12) {
+            hours -= 12;
+            ampm = 'PM';
+        } else if (hours === 12) {
+            ampm = 'PM';
+        }
+    
+        const displayTime = `${hours}:${minutes < 10 ? '0' + minutes : minutes} ${ampm}`;
+    
         const { error } = await supabase
             .from('posts')
-            .insert([{ title, content, game, game_image: gameImage, created_at: new Date() }]);
+            .insert([{ 
+                title, 
+                content, 
+                game, 
+                game_image: gameImage, 
+                created_at: new Date(),
+                display_time: displayTime // Include converted display time in the inserted data
+            }]);
         if (error) {
             console.error('Error inserting post:', error);
             alert('Failed to create post: ' + error.message);
@@ -66,7 +92,6 @@ const CreatePost = () => {
             navigate('/');
         }
     };
-
     return (
         <div className="create-post-container">
             <h1>Create a New Post</h1>
@@ -100,12 +125,20 @@ const CreatePost = () => {
                 {selectedGame && <p>Game selected: {selectedGame}</p>}
                 {loading && <p>Loading games...</p>}
                 {gameImage && <img src={gameImage} alt={game} style={{ width: '100px', height: '100px', marginTop: '10px' }} />}
+                <input
+                    type="time"
+                    value={selectedTime}
+                    onChange={(e) => setSelectedTime(e.target.value)}
+                    required
+                />
                 <textarea
                     placeholder="Content"
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                     required
                 />
+
+
                 <button type="submit" className="createButton">Create Post</button>
             </form>
         </div>
