@@ -34,12 +34,7 @@ const CreatePost = () => {
                     page_size: 10
                 }
             });
-            const results = response.data.results;
-            setGames(results);
-            if (results.length > 0) {
-                setGame(results[0].name);
-                setGameImage(results[0].background_image);
-            }
+            setGames(response.data.results);
         } catch (error) {
             console.error('Error fetching games:', error);
         } finally {
@@ -65,17 +60,10 @@ const CreatePost = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Check if a game has been selected
-        if (!game) {
-            alert('Please select a game before submitting.');
-            return; // Prevent the form from submitting
-        }
-    
-        // Proceed with submitting the post
         const { error } = await supabase
             .from('posts')
             .insert([{ title, content, game, game_image: gameImage, created_at: new Date() }]);
-    
+
         if (error) {
             console.error('Error inserting post:', error);
             alert('Failed to create post: ' + error.message);

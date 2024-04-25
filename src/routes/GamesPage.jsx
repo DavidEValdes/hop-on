@@ -26,17 +26,24 @@ const GamesPage = () => {
     const params = {
       key: apiKey,
       search: searchTerm,
-      ordering: searchTerm ? '' : sortOrder, // Prioritize search term
+      ordering: sortOrder,
       page_size: pageSize,
       page: currentPage
     };
     axios.get('https://api.rawg.io/api/games', { params })
       .then(response => {
-        setGames(response.data.results);
-        setTotalGames(response.data.count);
+        if (response.data && response.data.results.length > 0) {
+          setGames(response.data.results);
+          setTotalGames(response.data.count);
+        } else {
+          setGames([]); // Handle no results case
+          setTotalGames(0);
+        }
       })
       .catch(error => {
         console.error('Error fetching games:', error);
+        setGames([]); // Ensure clearing games on error
+        setTotalGames(0);
       })
       .finally(() => {
         setLoading(false);
@@ -89,8 +96,8 @@ const GamesPage = () => {
       >
         <option value="10">10 Games</option>
         <option value="20">20 Games</option>
-        <option value="50">50 Games</option>
-        <option value="100">100 Games</option>
+        <option value="40">40 Games</option>
+        
       </select>
       {loading ? (
         <h2>Loading...</h2>
