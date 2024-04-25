@@ -1,76 +1,90 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const apiKey = import.meta.env.VITE_RAWG_API_KEY;
 
+const debounce = (func, wait) => {
+    let timeout;
+    return function (...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+};
+
 const GamesPage = () => {
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
-  const [sortOrder, setSortOrder] = useState('rating');
+  const [sortOrder, setSortOrder] = useState('');
   const [pageSize, setPageSize] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalGames, setTotalGames] = useState(0);
 
-  useEffect(() => {
-    const fetchGames = async () => {
-      setLoading(true);
-      try {
-        const response = await axios.get('https://api.rawg.io/api/games', {
-          params: {
-            key: apiKey,
-            tags: 'co-op',
-            search: searchTerm,
-            ordering: sortOrder === 'rating' ? '-rating' : '-released',
-            page_size: pageSize,
-            page: currentPage
-          }
-        });
+  const fetchGames = useCallback(debounce(() => {
+    setLoading(true);
+    const params = {
+      key: apiKey,
+      search: searchTerm,
+      ordering: searchTerm ? '' : sortOrder, // Prioritize search term
+      page_size: pageSize,
+      page: currentPage
+    };
+    axios.get('https://api.rawg.io/api/games', { params })
+      .then(response => {
         setGames(response.data.results);
         setTotalGames(response.data.count);
-      } catch (error) {
+      })
+      .catch(error => {
         console.error('Error fetching games:', error);
-      } finally {
+      })
+      .finally(() => {
         setLoading(false);
-      }
-    };
+      });
+  }, 300), [searchTerm, sortOrder, pageSize, currentPage]);
 
+  useEffect(() => {
     fetchGames();
-  }, [searchTerm, sortOrder, pageSize, currentPage]);
+  }, [fetchGames]);
 
-  const handlePreviousPage = () => {
-    setCurrentPage(currentPage > 1 ? currentPage - 1 : 1);
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+    setCurrentPage(1);
   };
 
-  const handleNextPage = () => {
-    setCurrentPage(currentPage + 1);
+  const handleSortChange = (e) => {
+    setSortOrder(e.target.value);
+    setCurrentPage(1);
+  };
+
+  const handlePageSizeChange = (e) => {
+    setPageSize(e.target.value);
+    setCurrentPage(1);
   };
 
   return (
     <div className="gamesContainer">
-      <h1 className="gamesTitle">All Co-Op Games</h1>
-      <div className="totalGamesDisplay">Total Games: {totalGames}</div>
-      <br></br>
-      <div>
+      <h1>All The Games On The Planet</h1>
+      <div>Total Games: {totalGames}</div>
       <input
         type="text"
         placeholder="Search games..."
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={handleSearchChange}
         className="searchInput"
       />
       <select
         value={sortOrder}
-        onChange={(e) => setSortOrder(e.target.value)}
+        onChange={handleSortChange}
         className="sortDropdown"
       >
-        <option value="rating">Sort by Rating</option>
-        <option value="released">Sort by Release Date</option>
+        <option value="">Popular Games</option>
+        <option value="-rating">Sort by Rating</option>
+        <option value="-released">Sort by Release Date</option>
       </select>
       <select
         value={pageSize}
-        onChange={(e) => setPageSize(e.target.value)}
+        onChange={handlePageSizeChange}
         className="pageSizeDropdown"
       >
         <option value="10">10 Games</option>
@@ -78,38 +92,29 @@ const GamesPage = () => {
         <option value="50">50 Games</option>
         <option value="100">100 Games</option>
       </select>
-      </div>
       {loading ? (
         <h2>Loading...</h2>
       ) : games.length === 0 ? (
         <div>No games found. Please adjust your search or filter settings.</div>
       ) : (
         <>
-          <div className="pagination">
-            <button onClick={handlePreviousPage} disabled={currentPage <= 1}>←</button>
-            <span>Page {currentPage} of {Math.ceil(totalGames / pageSize)}</span>
-            <button onClick={handleNextPage} disabled={currentPage >= Math.ceil(totalGames / pageSize)}>→</button>
-          </div>
           <ul className="gamesList">
-  {games.map(game => (
-    <li key={game.id} className="gameCard">
-      <Link to={`/games/${game.slug}`} className="gameLink">
-        <img src={game.background_image} alt={game.name} className="gameImage" />
-        <h3 className = "gameTitle">{game.name}</h3>
-        <div className="gameDetails">
-          <div className="gameRating">Rating: {game.rating || <span className="notAvailable">N/A</span>}</div>
-          <div className="gameReleased">Released: {game.released || <span className="notAvailable">N/A</span>}</div>
-        </div>
-      </Link>
-    </li>
-  ))}
-</ul>
-
-          <div className="pagination">
-            <button onClick={handlePreviousPage} disabled={currentPage <= 1}>←</button>
-            <span>Page {currentPage} of {Math.ceil(totalGames / pageSize)}</span>
-            <button onClick={handleNextPage} disabled={currentPage >= Math.ceil(totalGames / pageSize)}>→</button>
-          </div>
+            {games.map(game => (
+              <li key={game.id} className="gameCard">
+                <Link to={`/games/${game.slug}`} className="gameLink">
+                  <img src={game.background_image} alt={game.name} className="gameImage" />
+                  <h3>{game.name}</h3>
+                  <div className="gameDetails">
+                    <div className="gameRating">Rating: {game.rating || 'N/A'}</div>
+                    <div className="gameReleased">Released: {game.released || 'N/A'}</div>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <button onClick={() => setCurrentPage(p => p > 1 ? p - 1 : 1)}>← Previous</button>
+          <span>Page {currentPage} of {Math.ceil(totalGames / pageSize)}</span>
+          <button onClick={() => setCurrentPage(p => p < Math.ceil(totalGames / pageSize) ? p + 1 : p)}>Next →</button>
         </>
       )}
     </div>
