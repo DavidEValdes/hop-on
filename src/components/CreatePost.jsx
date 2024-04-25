@@ -1,18 +1,9 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { supabase } from '../supabaseClient';
 
 const apiKey = import.meta.env.VITE_RAWG_API_KEY;
-
-const debounce = (func, wait) => {
-    let timeout;
-    return function (...args) {
-        const context = this;
-        clearTimeout(timeout);
-        timeout = setTimeout(() => func.apply(context, args), wait);
-    };
-};
 
 const CreatePost = () => {
     const [title, setTitle] = useState('');
@@ -22,19 +13,26 @@ const CreatePost = () => {
     const [games, setGames] = useState([]);
     const [loading, setLoading] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
+    const [selectedGame, setSelectedGame] = useState('');  // To display the selected game
     const navigate = useNavigate();
 
-    const fetchGames = async (search) => {
+    const fetchGames = async () => {
         setLoading(true);
         try {
             const response = await axios.get(`https://api.rawg.io/api/games`, {
                 params: {
                     key: apiKey,
-                    search: search,
+                    search: searchTerm,
                     page_size: 10
                 }
             });
-            setGames(response.data.results);
+            const results = response.data.results;
+            setGames(results);
+            if (results.length > 0) {
+                setGame(results[0].name);
+                setGameImage(results[0].background_image);
+                setSearchTerm(results[0].name); // Optionally update searchTerm to the first result's name
+            }
         } catch (error) {
             console.error('Error fetching games:', error);
         } finally {
@@ -42,20 +40,17 @@ const CreatePost = () => {
         }
     };
 
-    const debouncedFetchGames = useCallback(debounce(fetchGames, 300), []);
-
-    useEffect(() => {
-        if (searchTerm && searchTerm !== game) {
-            debouncedFetchGames(searchTerm);
-        }
-    }, [searchTerm, game, debouncedFetchGames]);
-
     const handleGameChange = (e) => {
-        const selectedGame = games.find(game => game.name === e.target.value);
+        const selectedGame = games.find(g => g.name === e.target.value);
         if (selectedGame) {
             setGame(selectedGame.name);
             setGameImage(selectedGame.background_image);
+            setSearchTerm(selectedGame.name);
         }
+    };
+
+    const handleSelectGame = () => {
+        setSelectedGame(game); // Set the selected game to display
     };
 
     const handleSubmit = async (e) => {
@@ -63,7 +58,6 @@ const CreatePost = () => {
         const { error } = await supabase
             .from('posts')
             .insert([{ title, content, game, game_image: gameImage, created_at: new Date() }]);
-
         if (error) {
             console.error('Error inserting post:', error);
             alert('Failed to create post: ' + error.message);
@@ -81,25 +75,29 @@ const CreatePost = () => {
                     type="text"
                     placeholder="Search game..."
                     value={searchTerm}
-                    onChange={(e) => {
-                        setSearchTerm(e.target.value);
-                        setLoading(true);
-                    }}
+                    onChange={(e) => setSearchTerm(e.target.value)}
                 />
-                {searchTerm && !loading ? ( // Render select only when there is a search term and not loading
-                    <select
-                        value={game}
-                        onChange={handleGameChange}
-                        required
-                        size={games.length > 0 ? "5" : undefined}
-                    >
-                        {games.map((game) => (
-                            <option key={game.id} value={game.name}>
-                                {game.name}
-                            </option>
-                        ))}
-                    </select>
-                ) : null}
+                <button type="button" onClick={fetchGames} disabled={loading || !searchTerm}>
+                    Search Games
+                </button>
+                {games.length > 0 && !loading && (
+                    <div>
+                        <select
+                            value={game}
+                            onChange={handleGameChange}
+                            required
+                            size={games.length > 0 ? "5" : undefined}
+                        >
+                            {games.map((game) => (
+                                <option key={game.id} value={game.name}>
+                                    {game.name}
+                                </option>
+                            ))}
+                        </select>
+                        <button type="button" onClick={handleSelectGame}>Select</button>
+                    </div>
+                )}
+                {selectedGame && <p>Game selected: {selectedGame}</p>}
                 {loading && <p>Loading games...</p>}
                 {gameImage && <img src={gameImage} alt={game} style={{ width: '100px', height: '100px', marginTop: '10px' }} />}
                 <textarea

@@ -12,19 +12,11 @@ function EditPost() {
     const [games, setGames] = useState([]);
     const [loading, setLoading] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
+    const [selectedGame, setSelectedGame] = useState('');
 
     useEffect(() => {
         fetchPostDetails();
     }, [postId]);
-
-    useEffect(() => {
-        if (searchTerm.length > 2) {
-            fetchGames(searchTerm);
-        } else {
-            setGames([]);
-        }
-    }, [searchTerm]);
-    
 
     const fetchPostDetails = async () => {
         const { data, error } = await supabase
@@ -43,35 +35,29 @@ function EditPost() {
                 game: data.game,
                 gameImage: data.game_image
             });
-            setSearchTerm(data.game); // Set search term to the game name
+            setSearchTerm(data.game);
+            setSelectedGame(data.game);
         }
     };
 
-    const fetchGames = useCallback(async (search) => {
+    const fetchGames = useCallback(async () => {
         setLoading(true);
         try {
             const response = await axios.get(`https://api.rawg.io/api/games`, {
                 params: {
                     key: apiKey,
-                    search: search,
+                    search: searchTerm,
                     page_size: 10
                 }
             });
-            const results = response.data.results;
-            setGames(results);
-            if (results.length > 0 && (!post.game || !games.some(g => g.name === post.game))) {
-                setPost(prevPost => ({
-                    ...prevPost,
-                    game: results[0].name,
-                    gameImage: results[0].background_image
-                }));
-            }
+            setGames(response.data.results);
+            setPost(prev => ({ ...prev, game: '' })); // Reset selected game to ensure user has to select again
         } catch (error) {
             console.error('Error fetching games:', error);
         } finally {
             setLoading(false);
         }
-    }, [post.game, games]);
+    }, [searchTerm, apiKey]);
 
     const handleGameSelect = (e) => {
         const selectedGame = games.find(game => game.name === e.target.value);
@@ -81,8 +67,12 @@ function EditPost() {
                 game: selectedGame.name,
                 gameImage: selectedGame.background_image
             });
-            setSearchTerm(selectedGame.name);  // Update the searchTerm to reflect the selected game name
+            setSelectedGame(selectedGame.name);
         }
+    };
+
+    const handleSelectGame = () => {
+        setSelectedGame(post.game); // Confirm the selected game
     };
 
     const handleChange = (e) => {
@@ -115,14 +105,27 @@ function EditPost() {
         <div className="edit-post-container">
             <h1>Edit Post</h1>
             <form onSubmit={handleSubmit} className="edit-form">
-                <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
-                {loading ? <p>Loading games...</p> : (
-                    <select value={post.game} onChange={handleGameSelect} required>
-                        {games.map(game => (
-                            <option key={game.id} value={game.name}>{game.name}</option>
-                        ))}
-                    </select>
+                <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <button type="button" onClick={fetchGames} disabled={loading || !searchTerm}>
+                    Search Games
+                </button>
+                {games.length > 0 && !loading && (
+                    <div>
+                        <select value={post.game} onChange={handleGameSelect} required>
+                            <option value="">Select a game...</option>
+                            {games.map(game => (
+                                <option key={game.id} value={game.name}>{game.name}</option>
+                            ))}
+                        </select>
+                       
+                    </div>
                 )}
+                {selectedGame && <p>Game selected: {selectedGame}</p>}
+                {loading && <p>Loading games...</p>}
                 {post.gameImage && <img src={post.gameImage} alt="Selected game" style={{ width: '100px', height: '100px' }} />}
                 <textarea name="content" value={post.content} onChange={handleChange} required />
                 <button type="submit">Update Post</button>
