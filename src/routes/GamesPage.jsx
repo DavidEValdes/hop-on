@@ -50,6 +50,8 @@ const GamesPage = () => {
   return (
     <div className="gamesContainer">
       <h1 className="gamesTitle">All Co-Op Games</h1>
+      <div className="totalGamesDisplay">Total Games: {totalGames}</div>
+      <br></br>
       <div>
       <input
         type="text"
@@ -89,16 +91,20 @@ const GamesPage = () => {
             <button onClick={handleNextPage} disabled={currentPage >= Math.ceil(totalGames / pageSize)}>→</button>
           </div>
           <ul className="gamesList">
-            {games.map(game => (
-              <li key={game.id} className="gameCard">
-                <Link to={`/games/${game.slug}`} className="gameLink">
-                  <h3>{game.name}</h3>
-                  <img src={game.background_image} alt={game.name} className="gameImage" />
-                </Link>
-                <p className="gameInfo">Rating: {game.rating} / Released: {game.released}</p>
-              </li>
-            ))}
-          </ul>
+  {games.map(game => (
+    <li key={game.id} className="gameCard">
+      <Link to={`/games/${game.slug}`} className="gameLink">
+        <img src={game.background_image} alt={game.name} className="gameImage" />
+        <h3 className = "gameTitle">{game.name}</h3>
+        <div className="gameDetails">
+          <div className="gameRating">Rating: {game.rating}</div>
+          <div className="gameReleased">Released: {game.released || <span className="noReleaseDate">N/A</span>}</div>
+        </div>
+      </Link>
+    </li>
+  ))}
+</ul>
+
           <div className="pagination">
             <button onClick={handlePreviousPage} disabled={currentPage <= 1}>←</button>
             <span>Page {currentPage} of {Math.ceil(totalGames / pageSize)}</span>

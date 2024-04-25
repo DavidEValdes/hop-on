@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 
@@ -24,20 +24,28 @@ function CreatePost() {
             setGame('');
             alert('Post created successfully!');
             navigate(`/`);
-        
         }
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input type="text" placeholder="Title" value={title} onChange={e => setTitle(e.target.value)} required />
-            <br></br>
-            <textarea placeholder="Content" value={content} onChange={e => setContent(e.target.value)} />
-            <br></br>
-            <input type="text" placeholder="Game" value={game} onChange={e => setGame(e.target.value)} required />
-            <br></br>
-            <button type="submit">Create Post</button>
-        </form>
+        <div className="create-post-container">
+            <h1>Create New Post</h1>
+            <form onSubmit={handleSubmit} className="create-form">
+                <label>
+                    Title
+                    <input type="text" placeholder="Title" value={title} onChange={e => setTitle(e.target.value)} required />
+                </label>
+                <label>
+                    Content
+                    <textarea placeholder="Content" value={content} onChange={e => setContent(e.target.value)} />
+                </label>
+                <label>
+                    Game
+                    <input type="text" placeholder="Game" value={game} onChange={e => setGame(e.target.value)} required />
+                </label>
+                <button type="submit">Create Post</button>
+            </form>
+        </div>
     );
 }
 

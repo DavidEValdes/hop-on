@@ -235,29 +235,31 @@ button, .menu-link {
 /* Grid for Games Cards */
 .gamesList {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Games grid only expands on safari and not */
   gap: 20px;
   width: 100%;
   list-style: none;
   padding: 0;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.15) 100%);
-  padding: 20px; /* Adds padding around the content for better spacing */
-  margin-top: 20px; /* Optional: Adds spacing above the list */
-  border-radius: var(--border-radius); 
+ 
 }
+
+
+
 
 /* Individual Game Card Styling */
 .gameCard {
   display: flex;
   flex-direction: column;
+  justify-content: space-between; /* Ensures content is pushed to top and bottom */
   align-items: center;
-  background-color: #d3d3d3;
-  color: black;
+  background-color: #fff;
+  color: #000;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   padding: 20px;
-  transition: transform 0.3s ease-in-out;
-  text-align: center;
+  margin: 15px 0;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .gameCard:hover {
@@ -265,18 +267,19 @@ button, .menu-link {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
 }
 
-/* Styling for Game Images */
 .gameImage {
-  width: 100%;
-  height: 200px; /* Sets a fixed height for all images */
-  border-radius: 8px;
-  object-fit: cover;
+  width: 100%; /* Ensures all images have the same width */
+  height: 200px; /* Standardizes the height of images */
+  object-fit: cover; /* Ensures the image covers the designated area without distortion */
+  border-radius: var(--border-radius); /* Rounds the corners of the images */
 }
-
-/* Link Styling for Games */
+/* Styling for Game Image and Title */
 .gameLink {
   text-decoration: none;
   color: inherit;
+  flex-grow: 1; /* Allows the link content to fill the space */
+  display: flex;
+  flex-direction: column;
 }
 
 /* Additional Info Below Game Image */
@@ -284,7 +287,43 @@ button, .menu-link {
   margin-top: 10px;
 }
 
+/* Game details section at the bottom */
+.gameDetails {
+  margin-top: auto; /* Pushes itself to the bottom */
+  width: 100%; /* Ensures it fills the card width */
+  text-align: center;
+}
 
+/* CSS for Game Title */
+.gameTitle {
+  text-align: center; /* Center the text horizontally */
+}
+
+/* Additional CSS for modern styling */
+.gameRating, .gameReleased {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1));
+  color: #000000; /* Light text color for better readability on light background */
+  margin-top: 5px; /* Spacing for better visual separation */
+  padding: 8px 16px; /* Slightly larger padding for a more pronounced oval */
+  border-radius: 30px; /* Fully rounded ends to enhance the oval look */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Enhanced shadow for a more 3D effect */
+  font-size: 0.9em; /* Slightly smaller font size for aesthetic purposes */
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.gameRating:hover, .gameReleased:hover {
+  transform: scale(1.05); /* Slight enlargement on hover for interactive feedback */
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.2));
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Increased shadow on hover for depth */
+}
+
+.noReleaseDate {
+  font-style: italic;
+  color: #bbbbbb; /* Lighter text for 'N/A' to indicate less importance */
+}
 .aboutContainer {
   max-width: 800px;
   padding: 20px;
@@ -343,3 +382,198 @@ button, .menu-link {
   margin-top: 20px; /* Optional: Adds spacing above the list */
   border-radius: var(--border-radius); 
 }
+
+.game-detail-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background: var(--background-color);
+  color: var(--text-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light);
+}
+
+
+.game-title {
+  color: transparent;  /* Ensures that the text color is transparent so the gradient shows through */
+  text-align: center;
+  font-weight: bold;  /* Makes the font thicker */
+  text-transform: uppercase;  /* Capitalizes all letters for impact */
+  margin-bottom: 20px;  /* Adds space below the title */
+  padding: 10px 0;  /* Top and bottom padding */
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.8));  /* Brighter white gradient effect */
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.game-image-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.game-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--border-radius);
+}
+
+.game-info-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.game-info {
+  background: #424242; /* Medium-dark grey */
+  color: #FFFFFF; /* White text */
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .game-detail-container {
+    padding: 10px;
+  }
+
+  .game-title {
+    font-size: 1.8rem;
+  }
+
+  .game-info-container {
+    max-width: 95%;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Adjustments for smaller screens */
+@media (max-width: 720px) {
+  .gamesList {
+    grid-template-columns: .9fr; /* Only one column on smaller screens */
+  }
+}
+
+
+
+.edit-post-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: var(--background-color);
+  padding: 30px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light);
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box; /* Include padding and border in the element's width */
+}
+
+.edit-form label {
+  display: flex;
+  flex-direction: column;
+  color: var(--text-color);
+}
+
+.edit-form input, .edit-form textarea {
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--secondary-color);
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  width: 100%; /* Make sure inputs do not exceed their container */
+  box-sizing: border-box; /* Include padding and border in the element's width */
+}
+
+.edit-form button {
+  padding: 10px;
+  border: none;
+  background-color: var(--accent-color);
+  color: black;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.edit-form button:hover {
+  background-color: var(--hover-color);
+}
+
+h1 {
+  color: var(--primary-color);
+}
+
+
+
+
+
+.create-post-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.create-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: var(--background-color);
+  padding: 30px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light);
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box; /* Include padding and border in the element's width */
+}
+
+.create-form label {
+  display: flex;
+  flex-direction: column;
+  color: var(--text-color);
+}
+
+.create-form input, .create-form textarea {
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--secondary-color);
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  width: 100%; /* Make sure inputs do not exceed their container */
+  box-sizing: border-box; /* Include padding and border in the element's width */
+}
+
+.create-form button {
+  padding: 10px;
+  border: none;
+  background-color: var(--accent-color);
+  color: black;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.create-form button:hover {
+  background-color: var(--hover-color);
+}
+
