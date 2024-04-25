@@ -64,8 +64,10 @@ function PostPage() {
             <h1 className="post-title">{post.title}</h1>
             {post.game_image && <img src={post.game_image} alt="Post" className="post-image" />}
             <h2 className="post-game">{post.game}</h2>
-            <p className="post-content"> {post.content}</p>
+            <p className="post-content">{post.content}</p>
             <p className="post-upvotes">Upvotes: {post.upvotes}</p>
+            <p className="post-display-time"> @{post.display_time}</p>
+            <span>Created at: {new Date(post.created_at).toLocaleString()}</span>
             <button onClick={() => navigate(`/edit/${postId}`)} className="edit-post-button">Edit Post</button>
             <button onClick={handleDelete} className="delete-post-button">Delete Post</button>
             <button onClick={handleUpvote} className="upvote-post-button">Upvote Post</button>
