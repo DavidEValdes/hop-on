@@ -771,3 +771,94 @@ h1 {
 .post-game{
   font-size:2.0rem;
 }
+
+
+.postDisplayTime{
+  font-size:1.5rem;
+}
+
+
+.postContent {
+  position: relative; /* Needed for absolute positioning of the pseudo-element */
+  font-size: 1rem; /* Set font size for readability */
+  color: #333333; /* Dark grey color for text */
+  background-color: #f0f0f0; /* Light grey background */
+  padding: 30px; /* Increased top padding to accommodate label */
+  padding-top: 40px; /* Additional top padding to create space below the label */
+  margin: 10px 0; /* Margin for spacing above and below */
+  border-radius: 8px; /* Rounded corners for aesthetics */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* More apparent shadow for depth */
+  line-height: 1.5; /* Line height for better readability */
+  word-wrap: break-word; /* Ensure long words do not overflow */
+  overflow: hidden; /* Hide overflow */
+  text-align: left; /* Align text to the left */
+  display: block; /* Block display to occupy full width */
+}
+
+.postContent::before {
+  content: "Additional details:";
+  position: absolute;
+  top: 10px; /* Positioning from the top inside the box */
+  left: 20px; /* Positioning from the left inside the box */
+  font-size: 0.9rem; /* Slightly smaller font size than the content for differentiation */
+  color: #666666; /* Slightly lighter color for the label */
+  font-weight: bold; /* Bold text to make it stand out */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 720px) {
+  .postContent {
+    padding: 20px; /* Adjusted padding on smaller screens */
+    padding-top: 30px; /* Maintain ample space below the label on smaller screens */
+    font-size: 0.9rem; /* Adjust font size for smaller screens */
+  }
+}
+.postMeta, .commentsMeta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0; /* No padding around the container */
+  margin-right: 20px; /* Right margin for spacing between metadata elements */
+}
+
+.postMeta p, .commentsMeta p {
+  background-color: #e8f4f8; /* Light blue background for upvotes */
+  color: #0077b6; /* Dark blue text for contrast */
+  padding: 6px 12px; /* Padding around the text */
+  border-radius: 20px; /* Rounded corners for an oval shape */
+  margin: 0 10px 0 0; /* Margin to space out individual elements within the metadata */
+  font-size: 1rem; /* Comfortable reading size */
+  line-height: 1.5; /* Proper line spacing for readability */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition effects */
+}
+
+.commentsMeta p {
+  background-color: #ffdede; /* Soft red background for comments */
+  color: #cc0000; /* Darker red text for contrast */
+}
+
+/* Additional hover effects for interaction feedback */
+.postMeta p:hover, .commentsMeta p:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+
+.postDetails span {
+  color: black; /* Using the color defined in the root */
+  background: linear-gradient(to right, #d3d3d3, #efefef); /* Grey gradient background */
+  padding: 4px 10px; /* Slightly smaller padding */
+  border-radius: 15px; /* Smooth rounded corners for a modern pill shape */
+  font-size: 0.85rem; /* Slightly smaller font size for subtlety */
+  margin-top: 5px; /* Top margin for spacing */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  display: inline-block; /* Ensures the background and padding encapsulate the text */
+  transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition effects for interaction */
+  cursor: default; /* Default cursor as this element is not interactive */
+}
+
+/* Hover effect to slightly enhance the shadow, aligning with meta hover styles */
+.postDetails span:hover {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Slightly enhanced shadow on hover for a subtle interaction */
+}

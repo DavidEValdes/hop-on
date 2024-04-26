@@ -9,13 +9,12 @@ function PostFeed() {
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
-    // Use useCallback to ensure fetchPosts is not recreated unless necessary
     const fetchPosts = useCallback(async (term) => {
         setLoading(true);
         try {
             const { data, error } = await supabase
                 .from('posts')
-                .select('*')
+                .select('id, title, game, content, upvotes, comments_count, created_at, display_time, game_image')
                 .ilike('game', `%${term}%`)
                 .order(sortBy, { ascending: false });
 
@@ -35,7 +34,7 @@ function PostFeed() {
     useEffect(() => {
         const timer = setTimeout(() => {
             fetchPosts(searchTerm);
-        }, 500); // Debounce the search term input
+        }, 500);
         return () => clearTimeout(timer);
     }, [searchTerm, fetchPosts]);
 
@@ -52,7 +51,15 @@ function PostFeed() {
     };
 
     const handleFormSubmit = (event) => {
-        event.preventDefault(); // Prevent the default form submission behavior
+        event.preventDefault();
+    };
+    const formatTime = (timeString) => {
+        // Create a full date-time string by appending a safe base date
+        const dateString = `1970-01-01 ${timeString}`;
+        // Parse it as local time
+        const date = new Date(dateString);
+        // Format it to show only time in 12-hour format with AM/PM
+        return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
     };
 
     return (
@@ -76,10 +83,14 @@ function PostFeed() {
                     <div key={post.id} className="postCard" onClick={() => navigate(`/posts/${post.id}`)}>
                         <div className="postDetails">
                             <h4 className="postGame">{post.game}</h4>
+                            <h4 className="postDisplayTime">@ {formatTime(post.display_time)}</h4>
                             <p className="postContent">{post.content}</p>
                             <div className="postMeta">
-                            <span>Created at: {new Date(post.created_at).toLocaleString()} @{post.display_time}</span>
                                 <p>Upvotes: {post.upvotes}</p>
+                                <div className="commentsMeta">
+                                    <p>Comments: {post.comments_count}</p>
+                                </div>
+                                <span>Posted at: {new Date(post.created_at).toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
                             </div>
                         </div>
                         {post.game_image && <img src={post.game_image} alt={post.title} className="postImage" />}

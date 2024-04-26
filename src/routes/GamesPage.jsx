@@ -99,6 +99,11 @@ const GamesPage = () => {
         <option value="40">40 Games</option>
         
       </select>
+      <span>
+      <button onClick={() => setCurrentPage(p => p > 1 ? p - 1 : 1)}>←</button>
+          <span>Page {currentPage} of {Math.ceil(totalGames / pageSize)}</span>
+          <button onClick={() => setCurrentPage(p => p < Math.ceil(totalGames / pageSize) ? p + 1 : p)}>→</button>
+          </span>
       {loading ? (
         <h2>Loading...</h2>
       ) : games.length === 0 ? (
@@ -119,9 +124,11 @@ const GamesPage = () => {
               </li>
             ))}
           </ul>
-          <button onClick={() => setCurrentPage(p => p > 1 ? p - 1 : 1)}>← Previous</button>
+          <span>
+      <button onClick={() => setCurrentPage(p => p > 1 ? p - 1 : 1)}>←</button>
           <span>Page {currentPage} of {Math.ceil(totalGames / pageSize)}</span>
-          <button onClick={() => setCurrentPage(p => p < Math.ceil(totalGames / pageSize) ? p + 1 : p)}>Next →</button>
+          <button onClick={() => setCurrentPage(p => p < Math.ceil(totalGames / pageSize) ? p + 1 : p)}>→</button>
+          </span>
         </>
       )}
     </div>
