@@ -71,7 +71,7 @@ const GamesPage = () => {
 
   return (
     <div className="gamesContainer">
-      <h1>All The Games On The Planet</h1>
+      <h1>Browse All Games</h1>
       <div>Total Games: {totalGames}</div>
       <div>
       <input

@@ -17,6 +17,11 @@ const CreatePost = () => {
     const [selectedTime, setSelectedTime] = useState('');  // State to hold the selected time
     const navigate = useNavigate();
 
+    // Function to check if all required fields are filled
+    const isFormValid = () => {
+        return title && content && game && selectedTime;
+    };
+
     const fetchGames = async () => {
         setLoading(true);
         try {
@@ -92,6 +97,7 @@ const CreatePost = () => {
             navigate('/');
         }
     };
+    
     return (
         <div className="create-post-container">
             <h1>Create a New Post</h1>
@@ -122,12 +128,14 @@ const CreatePost = () => {
     </div>
 )}
             <form onSubmit={handleSubmit} className="create-form">
+            <label style={{ marginTop: '15px' }}>Game:
                 <input
                     type="text"
                     placeholder="Search game..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
+            </label>
                 <button type="button" onClick={fetchGames} disabled={loading || !searchTerm}>
                     Search Games
                 </button>
@@ -191,14 +199,15 @@ const CreatePost = () => {
 )}
                 {loading && <p>Loading games...</p>}
                 
-                
+                <label style={{ marginTop: '15px' }}>Hop On Time:
                 <input
                     type="time"
                     value={selectedTime}
                     onChange={(e) => setSelectedTime(e.target.value)}
                     required
-                    style={{ marginTop: '30px' }}  // Adds margin top
+                      
                 />
+                </label>
                 <p className="createPostDate">Please Enter Time in "00:00 AM/PM" Format</p>
                 <textarea
                     placeholder="Additional Details"

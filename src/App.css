@@ -231,8 +231,9 @@ body {
 }
 
 .post-image {
-  width: 100%;
-  height: auto;
+  width: 100%; /* Ensures the image takes the full width of its container */
+  max-height: 500px; /* Maximum height for the image */
+  object-fit: cover; /* Covers the area of the container without distorting the aspect ratio */
   border-radius: var(--border-radius);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   margin-bottom: 20px;
@@ -550,13 +551,15 @@ button, .menu-link {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
+  overflow: hidden;  /* Ensures no part of the image spills out if it's too large */
 }
 
 .game-image {
-  max-width: 100%;
-  height: auto;
-  border-radius: var(--border-radius);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Deeper shadow for a pop-out effect */
+  max-width: 100%; /* Maximum width of the image is 100% of its container */
+  max-height: 500px; /* Maximum height is set to prevent overly tall images */
+  width: auto; /* Width is automatically adjusted to maintain aspect ratio */
+  height: auto; /* Height is automatically adjusted to maintain aspect ratio */
+  object-fit: contain; /* Ensures the image is scaled properly to fit within its bounds */
 }
 
 .game-info {
@@ -931,4 +934,26 @@ h1 {
 /* Hover effect to slightly enhance the shadow, aligning with meta hover styles */
 .postDetails span:hover {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Slightly enhanced shadow on hover for a subtle interaction */
+}
+
+.view-game-details-button {
+  background-image: linear-gradient(to right, #a0efff, #b0b6e1); /* Lighter shades of your theme colors */
+  color: #20232a; /* Dark text for better contrast on light gradient */
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  display: inline-block;
+  text-align: center;
+  margin: 10px 0;
+  transition: background-image 0.3s, color 0.3s, box-shadow 0.3s; /* Smooth transitions for background and text color changes */
+
+  /* Shadow and hover effects */
+  box-shadow: var(--shadow-light);
+  cursor: pointer;
+}
+
+.view-game-details-button:hover {
+  background-image: linear-gradient(to right, #e8e8ed, #a0efff); /* Inverted lighter gradient for hover effect */
+  color: #20232a; /* Maintaining dark text for readability */
+  box-shadow: var(--shadow-heavy);
 }

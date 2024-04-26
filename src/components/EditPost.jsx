@@ -8,7 +8,7 @@ const apiKey = import.meta.env.VITE_RAWG_API_KEY;
 function EditPost() {
     const { postId } = useParams();
     const navigate = useNavigate();
-    const [post, setPost] = useState({ title: '', content: '', game: '', gameImage: '' });
+    const [post, setPost] = useState({ title: '', content: '', game: '', gameImage: '', displayTime: '' });
     const [games, setGames] = useState([]);
     const [loading, setLoading] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
@@ -33,7 +33,8 @@ function EditPost() {
                 title: data.title,
                 content: data.content,
                 game: data.game,
-                gameImage: data.game_image
+                gameImage: data.game_image,
+                displayTime: data.display_time
             });
             setSearchTerm(data.game);
             setSelectedGame(data.game);
@@ -51,7 +52,7 @@ function EditPost() {
                 }
             });
             setGames(response.data.results);
-            setPost(prev => ({ ...prev, game: '' })); // Reset selected game to ensure user has to select again
+            setPost(prev => ({ ...prev, game: '' }));
         } catch (error) {
             console.error('Error fetching games:', error);
         } finally {
@@ -71,10 +72,6 @@ function EditPost() {
         }
     };
 
-    const handleSelectGame = () => {
-        setSelectedGame(post.game); // Confirm the selected game
-    };
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setPost({ ...post, [name]: value });
@@ -88,7 +85,8 @@ function EditPost() {
                 title: post.title,
                 content: post.content,
                 game: post.game,
-                game_image: post.gameImage
+                game_image: post.gameImage,
+                display_time: post.displayTime
             })
             .match({ id: postId });
 
@@ -107,28 +105,49 @@ function EditPost() {
             <form onSubmit={handleSubmit} className="edit-form">
                 <input
                     type="text"
+                    placeholder="Search game..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
+                    className="searchInput"
                 />
-                <button type="button" onClick={fetchGames} disabled={loading || !searchTerm}>
+                <button type="button" onClick={fetchGames} disabled={loading || !searchTerm} className="createButton">
                     Search Games
                 </button>
                 {games.length > 0 && !loading && (
-                    <div>
-                        <select value={post.game} onChange={handleGameSelect} required>
+                    <div className="gamesList">
+                        <select value={post.game} onChange={handleGameSelect} required className="sortDropdown">
                             <option value="">Select a game...</option>
                             {games.map(game => (
                                 <option key={game.id} value={game.name}>{game.name}</option>
                             ))}
                         </select>
-                       
                     </div>
                 )}
                 {selectedGame && <p>Game selected: {selectedGame}</p>}
                 {loading && <p>Loading games...</p>}
-                {post.gameImage && <img src={post.gameImage} alt="Selected game" style={{ width: '100px', height: '100px' }} />}
-                <textarea name="content" value={post.content} onChange={handleChange} required />
-                <button type="submit">Update Post</button>
+                {post.gameImage && (
+                    <div className="game-image-container">
+                        <img src={post.gameImage} alt="Selected game" className="game-image"/>
+                    </div>
+                )}
+                <textarea
+                    name="content"
+                    value={post.content}
+                    onChange={handleChange}
+                    required
+                    className="comments-textarea"
+                />
+                <label>Hop On Time:
+                    <input
+                        type="time"
+                        name="displayTime"
+                        value={post.displayTime}
+                        onChange={handleChange}
+                        required
+                        className="searchInput"
+                    />
+                </label>
+                <button type="submit" className="createButton">Update Post</button>
             </form>
         </div>
     );
