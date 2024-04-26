@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
+import moment from 'moment-timezone';
 
 function PostFeed() {
     const [posts, setPosts] = useState([]);
@@ -54,14 +55,32 @@ function PostFeed() {
         event.preventDefault();
     };
     const formatTime = (timeString) => {
-        // Create a full date-time string by appending a safe base date
-        const dateString = `1970-01-01 ${timeString}`;
-        // Parse it as local time
-        const date = new Date(dateString);
-        // Format it to show only time in 12-hour format with AM/PM
-        return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+        // Ensure the timeString is not empty or undefined
+        if (!timeString) {
+            return "Time not available";
+        }
+    
+        try {
+            // Attempt to parse and format the time
+            const dateString = `1970-01-01T${timeString}`; // Assuming timeString is something like "14:45:00"
+            const date = new Date(dateString);
+            if (isNaN(date.getTime())) {
+                throw new Error('Invalid time value');
+            }
+            // Format it to show only time in 12-hour format with AM/PM
+            const timeFormatted = date.toLocaleTimeString('en-US', {
+                hour: '2-digit', 
+                minute: '2-digit', 
+                hour12: true
+            });
+    
+            // Return formatted time without time zone
+            return timeFormatted;
+        } catch (error) {
+            console.error('Error formatting time:', error);
+            return "Invalid time"; // or any other fallback message
+        }
     };
-
     return (
         <div className="feedContainer">
             <form onSubmit={handleFormSubmit} className="toolbar">
@@ -83,7 +102,7 @@ function PostFeed() {
                     <div key={post.id} className="postCard" onClick={() => navigate(`/posts/${post.id}`)}>
                         <div className="postDetails">
                             <h4 className="postGame">{post.game}</h4>
-                            <h4 className="postDisplayTime">@ {formatTime(post.display_time)}</h4>
+                            <h4 className="postDisplayTime">@ {formatTime(post.display_time)} </h4>
                             <p className="postContent">{post.content}</p>
                             <div className="postMeta">
                                 <p>Upvotes: {post.upvotes}</p>

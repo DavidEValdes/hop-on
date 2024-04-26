@@ -59,18 +59,49 @@ function PostPage() {
         }
     };
 
+    const formatTime = (timeString) => {
+        if (!timeString) {
+            return "Time not available";
+        }
+    
+        try {
+            const dateString = `1970-01-01T${timeString}`;
+            const date = new Date(dateString);
+            if (isNaN(date.getTime())) {
+                throw new Error('Invalid time value');
+            }
+            return date.toLocaleTimeString('en-US', {
+                hour: '2-digit', 
+                minute: '2-digit', 
+                hour12: true
+            });
+        } catch (error) {
+            console.error('Error formatting time:', error);
+            return "Invalid time";
+        }
+    };
+
+
+
     return (
         <div className="post-page">
-            <h1 className="post-title">{post.title}</h1>
-            {post.game_image && <img src={post.game_image} alt="Post" className="post-image" />}
-            <h2 className="post-game">{post.game}</h2>
-            <p className="post-content">{post.content}</p>
+            <div className="post-details">
+                <h2 className="post-game">{post.game}</h2>
+                <p className="post-display-time">@ {post ? formatTime(post.display_time) : 'Loading...'}</p>
+                <h1 className="post-title">{post.title}</h1>
+                {post.game_image && <img src={post.game_image} alt="Post" className="post-image" />}
+                <p className="post-content">{post.content}</p>
+            </div>
+            <div className="button-container">
             <p className="post-upvotes">Upvotes: {post.upvotes}</p>
-            <p className="post-display-time"> @{post.display_time}</p>
-            <span>Created at: {new Date(post.created_at).toLocaleString()}</span>
-            <button onClick={() => navigate(`/edit/${postId}`)} className="edit-post-button">Edit Post</button>
-            <button onClick={handleDelete} className="delete-post-button">Delete Post</button>
-            <button onClick={handleUpvote} className="upvote-post-button">Upvote Post</button>
+                <span className="dateSpan">Created at: {new Date(post.created_at).toLocaleString()}</span>
+                <button onClick={() => navigate(`/edit/${postId}`)} className="edit-post-button">Edit Post</button>
+                <button onClick={handleDelete} className="delete-post-button">Delete Post</button>
+                <button onClick={handleUpvote} className="upvote-post-button">Upvote Post</button>
+                
+                
+            </div>
+            
             <CommentsSection postId={postId} />
         </div>
     );

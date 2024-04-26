@@ -36,7 +36,7 @@ const GameDetailPage = () => {
       </div>
       <div className="game-info">
         <p><strong>Released:</strong> {game.released || 'N/A'}</p>
-        <p><strong>Rating:</strong> {game.rating ? `${game.rating} / 5` : 'N/A'}</p>
+        <p><strong>Rating:</strong> {game.rating ? `${game.rating} /5` : 'N/A'}</p>
         <p><strong>Metacritic:</strong> {game.metacritic || 'N/A'}</p>
         <p><strong>Platforms:</strong> {game.platforms.map(platform => platform.platform.name).join(', ')}</p>
         <p><strong>Genres:</strong> {game.genres.map(genre => genre.name).join(', ')}</p>
