@@ -73,6 +73,7 @@ const GamesPage = () => {
     <div className="gamesContainer">
       <h1>All The Games On The Planet</h1>
       <div>Total Games: {totalGames}</div>
+      <div>
       <input
         type="text"
         placeholder="Search games..."
@@ -99,6 +100,7 @@ const GamesPage = () => {
         <option value="40">40 Games</option>
         
       </select>
+      </div>
       <span>
       <button onClick={() => setCurrentPage(p => p > 1 ? p - 1 : 1)}>←</button>
           <span>Page {currentPage} of {Math.ceil(totalGames / pageSize)}</span>
