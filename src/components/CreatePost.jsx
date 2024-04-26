@@ -95,6 +95,32 @@ const CreatePost = () => {
     return (
         <div className="create-post-container">
             <h1>Create a New Post</h1>
+            {gameImage && (
+    <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        marginTop: '20px', 
+        marginBottom: '20px' 
+    }}>
+        <div style={{
+            width: '120px', 
+            height: '120px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderRadius: '50%', // Makes the container circular
+            overflow: 'hidden', // Ensures the image does not break the border-radius rule
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)' // Subtle shadow for depth
+        }}>
+            <img src={gameImage} alt={game} style={{ 
+                width: 'auto', // Ensures the image maintains aspect ratio
+                height: '100%', // Full height of the container
+                display: 'block' // Removes bottom space/gap
+            }} />
+        </div>
+    </div>
+)}
             <form onSubmit={handleSubmit} className="create-form">
                 <input
                     type="text"
@@ -106,33 +132,76 @@ const CreatePost = () => {
                     Search Games
                 </button>
                 {games.length > 0 && !loading && (
-                    <div>
-                        <select
-                            value={game}
-                            onChange={handleGameChange}
-                            required
-                            size={games.length > 0 ? "5" : undefined}
-                        >
-                            {games.map((game) => (
-                                <option key={game.id} value={game.name}>
-                                    {game.name}
-                                </option>
-                            ))}
-                        </select>
-                        <button type="button" onClick={handleSelectGame}>Select</button>
-                    </div>
-                )}
-                {selectedGame && <p>Game selected: {selectedGame}</p>}
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', marginTop: '20px' }}>
+        <select
+            value={game}
+            onChange={handleGameChange}
+            required
+            size={games.length > 0 ? "5" : undefined}
+            style={{
+                width: '300px', // Adjust width as needed
+                padding: '10px',
+                marginBottom: '10px',
+                borderRadius: 'var(--border-radius)',
+                border: '1px solid var(--secondary-color)',
+                background: 'white', // White background for the dropdown
+                color: 'black', // Black text color
+                fontSize: '1rem'
+            }}
+        >
+            {games.map((game) => (
+                <option key={game.id} value={game.name} style={{ background: 'white', color: 'black' }}>
+                    {game.name}
+                </option>
+            ))}
+        </select>
+        <button
+            type="button"
+            onClick={handleSelectGame}
+            style={{
+                padding: '10px 20px',
+                borderRadius: 'var(--border-radius)',
+                background: 'var(--accent-color)',
+                color: 'var(--primary-color)',
+                border: 'none',
+                cursor: 'pointer',
+                transition: 'background-color 0.3s'
+            }}
+            onMouseOver={e => e.target.style.backgroundColor = 'var(--hover-color)'}
+            onMouseOut={e => e.target.style.backgroundColor = 'var(--accent-color)'}
+        >
+            Select
+        </button>
+    </div>
+)}
+               {selectedGame && (
+    <p style={{
+        fontSize: '1.2rem', // Larger font size for emphasis
+        fontWeight: 'bold', // Bold font weight for prominence
+        backgroundColor: 'var(--background-color)', // Contrast background
+        padding: '10px 20px', // Padding for better readability
+        borderRadius: 'var(--border-radius)', // Rounded corners
+        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)', // Subtle shadow for depth
+        marginTop: '20px', // Space above the paragraph
+        textAlign: 'center', // Center the text
+        border: '1px solid var(--secondary-color)' // Border to enhance visibility
+    }}>
+        Game selected: {selectedGame}
+    </p>
+)}
                 {loading && <p>Loading games...</p>}
-                {gameImage && <img src={gameImage} alt={game} style={{ width: '100px', height: '100px', marginTop: '10px' }} />}
+                
+                
                 <input
                     type="time"
                     value={selectedTime}
                     onChange={(e) => setSelectedTime(e.target.value)}
                     required
+                    style={{ marginTop: '30px' }}  // Adds margin top
                 />
+                <p className="createPostDate">Please Enter Time in "00:00 AM/PM" Format</p>
                 <textarea
-                    placeholder="Content"
+                    placeholder="Additional Details"
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                     required

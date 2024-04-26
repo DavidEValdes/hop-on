@@ -653,7 +653,10 @@ h1 {
   color: var(--primary-color);
 }
 
-
+.createPostDate{
+  margin-top: -15px;;
+  font-size:0.8rem;
+}
 
 
 
