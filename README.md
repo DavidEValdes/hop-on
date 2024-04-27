@@ -28,12 +28,12 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-* [X]Users can set a specific time for their gaming sessions when creating a post, which is then displayed in the feed and post page
-* [X]Integrated feature to search for and select video games from an external API during post creation and editing, enriching posts with game-related information and images.
-* [X]On each individual post, users can access each posts individual game detail page, accessing more intricate details about the video game being posted about.
-* [X]Comments section on each individual post created by users
-* [X]Browse all games with a games list, filters, and search bar in a separate games page, querying an external API to browse all games available using RAWG's API and database.
-* [X]About page explaining the site on a separate page with all of the features available to users
+- [X]Users can set a specific time for their gaming sessions when creating a post, which is then displayed in the feed and post page
+- [X]Integrated feature to search for and select video games from an external API during post creation and editing, enriching posts with game-related information and images.
+- [X]On each individual post, users can access each posts individual game detail page, accessing more intricate details about the video game being posted about.
+- [X]Comments section on each individual post created by users
+- [X]Browse all games with a games list, filters, and search bar in a separate games page, querying an external API to browse all games available using RAWG's API and database.
+- [X]About page explaining the site on a separate page with all of the features available to users
 
 ## Video Walkthrough
  
