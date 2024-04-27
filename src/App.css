@@ -957,3 +957,21 @@ h1 {
   color: #20232a; /* Maintaining dark text for readability */
   box-shadow: var(--shadow-heavy);
 }
+
+
+
+.create-post-dropdown {
+  width: 300px;
+  padding: 10px;
+  margin: 20px auto; /* Centers the dropdown and adds spacing */
+  border: 1px solid var(--secondary-color);
+  border-radius: var(--border-radius);
+  background: white;
+  color: black;
+  font-size: 1rem;
+  display: block; /* Ensures the dropdown is treated as a block element for centering */
+}
+
+.search-games-button {
+  margin-top: 20px; /* Adds spacing above the button */
+}
