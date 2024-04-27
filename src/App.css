@@ -376,20 +376,40 @@ button, .menu-link {
 
 .gamesList {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); 
+  grid-template-columns: repeat(5, 1fr); /* Sets 5 columns on large screens */
   gap: 20px;
   width: 100%;
   list-style: none;
   padding: 0;
 }
 
-/* If the above does not resolve the issue, consider adding more specific breakpoints */
-@media (max-width: 800px) {
-.gamesList {
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Smaller min-width for smaller screens */
-}
+/* Adjust grid for medium screens */
+@media (max-width: 1200px) {
+  .gamesList {
+    grid-template-columns: repeat(4, 1fr); /* Adjust to 4 columns on medium screens */
+  }
 }
 
+/* Adjust grid for small screens */
+@media (max-width: 992px) {
+  .gamesList {
+    grid-template-columns: repeat(3, 1fr); /* Adjust to 3 columns on small screens */
+  }
+}
+
+/* Adjust grid for extra small screens */
+@media (max-width: 768px) {
+  .gamesList {
+    grid-template-columns: repeat(2, 1fr); /* Adjust to 2 columns on extra small screens */
+  }
+}
+
+/* Adjust grid for very small screens */
+@media (max-width: 480px) {
+  .gamesList {
+    grid-template-columns: 1fr; /* Single column layout on very small screens */
+  }
+}
 
 
 
