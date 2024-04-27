@@ -3,15 +3,19 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const apiKey = import.meta.env.VITE_RAWG_API_KEY;
-
 const debounce = (func, wait) => {
-    let timeout;
-    return function (...args) {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => func.apply(this, args), wait);
-    };
+  let timeout;
+  return function (...args) {
+      const immediate = !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+          timeout = null;
+      }, wait);
+      if (immediate) {
+          func.apply(this, args);
+      }
+  };
 };
-
 const GamesPage = () => {
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -109,7 +113,8 @@ const GamesPage = () => {
       {loading ? (
         <h2>Loading...</h2>
       ) : games.length === 0 ? (
-        <div>No games found. Please adjust your search or filter settings, or please refresh the page and try again.</div>
+        <div>No games found, please try again or refresh the page.</div>
+        
       ) : (
         <>
           <ul className="gamesList">
