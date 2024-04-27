@@ -109,7 +109,7 @@ const GamesPage = () => {
       {loading ? (
         <h2>Loading...</h2>
       ) : games.length === 0 ? (
-        <div>No games found. Please adjust your search or filter settings.</div>
+        <div>No games found. Please adjust your search or filter settings, or please refresh the page and try again.</div>
       ) : (
         <>
           <ul className="gamesList">

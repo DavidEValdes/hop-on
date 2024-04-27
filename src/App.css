@@ -30,7 +30,7 @@ body {
   flex-direction: column;
   align-items: center;
   width: 100vw;
-  min-height: 100vh; /
+  min-height: 100vh; 
   overflow-x: hidden;
   background: transparent; 
 }
@@ -374,15 +374,20 @@ button, .menu-link {
   margin-bottom: 20px;
 }
 
-/* Grid for Games Cards */
 .gamesList {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Games grid only expands on safari and not */
+  grid-template-columns: repeat(5, 1fr); 
   gap: 20px;
   width: 100%;
   list-style: none;
   padding: 0;
- 
+}
+
+/* If the above does not resolve the issue, consider adding more specific breakpoints */
+@media (max-width: 800px) {
+.gamesList {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Smaller min-width for smaller screens */
+}
 }
 
 
