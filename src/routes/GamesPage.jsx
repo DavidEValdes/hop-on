@@ -84,7 +84,7 @@ const GamesPage = () => {
       <select
         value={sortOrder}
         onChange={handleSortChange}
-        className="sortDropdown"
+        className="pageSizeDropdown"
       >
         <option value="">Popular Games</option>
         <option value="-rating">Sort by Rating</option>
