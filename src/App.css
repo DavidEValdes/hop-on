@@ -490,7 +490,7 @@ button, .menu-link {
   border-radius: var(--border-radius);
   border: 1px solid var(--secondary-color);
 }
-.searchInput, .sortDropdown {
+.searchInput {
   padding: 10px;
   margin: 10px;
   border-radius: var(--border-radius);
@@ -552,6 +552,7 @@ button, .menu-link {
   justify-content: center;
   margin-bottom: 20px;
   overflow: hidden;  /* Ensures no part of the image spills out if it's too large */
+  border-radius: 20px;
 }
 
 .game-image {
@@ -960,7 +961,7 @@ h1 {
 
 
 
-.create-post-dropdown {
+.create-post-dropdown, .sortDropdown {
   width: 300px;
   padding: 10px;
   margin: 20px auto; /* Centers the dropdown and adds spacing */
@@ -974,4 +975,42 @@ h1 {
 
 .search-games-button {
   margin-top: 20px; /* Adds spacing above the button */
+}
+
+
+
+Copy code
+.create-post-container h1 {
+    font-size: 2rem; /* Larger font size for header */
+    color: var(--accent-color); /* Use your theme's accent color */
+    margin-bottom: 10px; /* Space below the header */
+}
+
+.create-post-container p {
+    font-size: 1.2rem; /* Comfortable reading size */
+    color: var(--text-color); /* Standard text color */
+    margin-bottom: 20px; /* Space below paragraph for separation */
+}
+
+.create-post-container ol {
+    padding-left: 20px; /* Align text nicely within container */
+    counter-reset: step-counter; /* Create a counter for list items */
+}
+
+.create-post-container li {
+    counter-increment: step-counter; /* Increase counter for each item */
+    margin-bottom: 10px; /* Space between items */
+    font-size: 1rem; /* Standard font size for list items */
+    line-height: 1.6; /* Adequate line spacing for readability */
+    list-style-type: none; /* Remove default list styling */
+    position: relative; /* Allows absolute positioning for pseudo-elements */
+    padding-left: 30px; /* Space for custom numbering */
+}
+
+.create-post-container li:before {
+    content: counter(step-counter) '. '; /* Display the counter before the text */
+    position: absolute; /* Position it absolutely within the li */
+    left: 0; /* Position it at the very left */
+    font-weight: bold; /* Make the numbers bold */
+    color: var(--accent-color); /* Color of the numbers */
 }

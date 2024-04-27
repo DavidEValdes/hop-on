@@ -82,6 +82,13 @@ const CreatePost = () => {
     return (
         <div className="create-post-container">
             <h1>Create a New Post</h1>
+            <p>Please follow the steps below to create your post:</p>
+            <ol>
+                <li>Search and select a game using the search bar.</li>
+                <li>Set the hop on time for when you'll be playing.</li>
+                <li>Add any additional details about your game session.</li>
+                <li>Click 'Create Post' to share your game session with others.</li>
+            </ol>
             {gameImage && (
                 <div style={{ 
                     display: 'flex', 
@@ -117,23 +124,22 @@ const CreatePost = () => {
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
                     <button type="button" className="search-games-button" onClick={fetchGames} disabled={loading || !searchTerm}>
-    
                         Search Games
                     </button>
                     {games.length > 0 && !loading && (
                         <select
-                        className="create-post-dropdown" // Use the new class name here
-                        value={selectedGame}
-                        onChange={handleGameChange}
-                        required
-                    >
-                        <option value="">Select a game...</option>
-                        {games.map((game) => (
-                            <option key={game.id} value={game.name}>
-                                {game.name}
-                            </option>
-                        ))}
-                    </select>
+                            className="create-post-dropdown"
+                            value={selectedGame}
+                            onChange={handleGameChange}
+                            required
+                        >
+                            <option value="">Select a game...</option>
+                            {games.map((game) => (
+                                <option key={game.id} value={game.name}>
+                                    {game.name}
+                                </option>
+                            ))}
+                        </select>
                     )}
                 </label>
                 {selectedGame && (
