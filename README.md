@@ -2,9 +2,9 @@
 
 Submitted by: **David Valdes**
 
-This web app: **insert description**
+This web app: **Hop On is a dynamic web application designed to connect gamers around the world. It offers a community-driven platform where users can create posts about upcoming gaming sessions, find and join games, and interact through comments and upvotes. The app streamlines the process of scheduling game times, browsing game titles and details, and enhances user engagement with robust social features, making it easier for gamers to connect and hop on their next adventure together.**
 
-Time spent: **X** hours spent in total
+Time spent: **50** hours spent in total
 
 ## Required Features
 
@@ -24,23 +24,19 @@ The following **required** functionality is completed:
 
 The following **optional** features are implemented:
 
-- [ ] Users can only edit and deleted posts or delete comments by entering the secret key, which is set by the user during post creation
-- [ ] Upon launching the web app, the user is assigned a random user ID. It will be associated with all posts and comments that they make and displayed on them.
-
-
-- [ ] Users can repost a previous post by referencing its post ID. On the post page of the new post, the referenced post is displayed and linked, creating a thread
-- [ ] Users can customize the interface of the web app
-- [ ] Users can share and view web videos
-- [ ] Users can set flags while creating a post. Then users can filter posnts by flags on the home feed.
-- [ ] Users can upload images directly from their local machine as an image file
 - [X] Display a loading animation whenever data is being fetched
 
 The following **additional** features are implemented:
 
-* [ ] List anything else that you added to improve the site's functionality!
+* [X]Users can set a specific time for their gaming sessions when creating a post, which is then displayed in the feed and post page
+* [X]Integrated feature to search for and select video games from an external API during post creation and editing, enriching posts with game-related information and images.
+* [X]On each individual post, users can access each posts individual game detail page, accessing more intricate details about the video game being posted about.
+* [X]Comments section on each individual post created by users
+* [X]Browse all games with a games list, filters, and search bar in a separate games page, querying an external API to browse all games available using RAWG's API and database.
+* [X]About page explaining the site on a separate page with all of the features available to users
 
 ## Video Walkthrough
-
+ 
 
 ## Notes
 

@@ -27,7 +27,7 @@ const AboutPage = () => {
       </p>
       <ul>
         <li><strong>Seamless Connectivity:</strong> Our intuitive design makes it effortless to hop on games without the fuss of complicated scheduling.</li>
-        <li><strong>Dynamic Community:</strong> Join a lively community that’s ready to play. Meet friends, challenge rivals, and enjoy a friendly environment.</li>
+        <li><strong>Dynamic Community:</strong> Meet friends, challenge rivals, and enjoy a friendly environment.</li>
         
       </ul>
       <h3>Hop Right In!</h3>

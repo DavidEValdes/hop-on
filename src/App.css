@@ -69,13 +69,11 @@ body {
   white-space: nowrap;
 }
 
-
 .Menu ul {
   list-style-type: none; 
   padding-left: 0; 
   margin: 0; 
 }
-
 
 .Menu-item {
   padding: 10px 0; 
@@ -88,7 +86,7 @@ body {
   padding: 10px 20px;
   transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
   border-radius: var(--border-radius);
-  background-color: transparent; /* Ensures the background is clear by default */
+  background-color: transparent; 
   font-weight: bold;
 }
 
@@ -126,8 +124,8 @@ body {
 
 .postCard {
   display: flex;
-  justify-content: space-between; /* Align children to the sides */
-  align-items: start; /* Align items to the top */
+  justify-content: space-between;
+  align-items: start; 
   background: #fff;
   color: #000;
   box-shadow: var(--shadow-light);
@@ -143,8 +141,8 @@ body {
 .postDetails {
   display: flex;
   flex-direction: column;
-  flex: 1; /* Takes up the remaining space after the image */
-  padding-right: 20px; /* Adds spacing between the text and the image */
+  flex: 1; 
+  padding-right: 20px; 
 }
 
 .button-container {
@@ -1006,7 +1004,6 @@ h1 {
 
 
 
-Copy code
 .create-post-container h1 {
     font-size: 2rem; /* Larger font size for header */
     color: var(--accent-color); /* Use your theme's accent color */

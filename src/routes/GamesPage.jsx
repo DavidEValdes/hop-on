@@ -76,7 +76,7 @@ const GamesPage = () => {
   return (
     <div className="gamesContainer">
       <h1>Browse All Games</h1>
-      <div>Total Games: {totalGames}</div>
+      <div>Total Games: {totalGames.toLocaleString()}</div>
       <div>
       <input
         type="text"
@@ -107,7 +107,7 @@ const GamesPage = () => {
       </div>
       <span>
       <button onClick={() => setCurrentPage(p => p > 1 ? p - 1 : 1)}>←</button>
-          <span>Page {currentPage} of {Math.ceil(totalGames / pageSize)}</span>
+          <span>Page {currentPage} of {Math.ceil(totalGames / pageSize).toLocaleString()}</span>
           <button onClick={() => setCurrentPage(p => p < Math.ceil(totalGames / pageSize) ? p + 1 : p)}>→</button>
           </span>
       {loading ? (
@@ -133,7 +133,7 @@ const GamesPage = () => {
           </ul>
           <span>
       <button onClick={() => setCurrentPage(p => p > 1 ? p - 1 : 1)}>←</button>
-          <span>Page {currentPage} of {Math.ceil(totalGames / pageSize)}</span>
+          <span>Page {currentPage} of {Math.ceil(totalGames / pageSize).toLocaleString()}</span>
           <button onClick={() => setCurrentPage(p => p < Math.ceil(totalGames / pageSize) ? p + 1 : p)}>→</button>
           </span>
         </>
