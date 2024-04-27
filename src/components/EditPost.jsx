@@ -103,6 +103,7 @@ function EditPost() {
         <div className="edit-post-container">
             <h1>Edit Post</h1>
             <form onSubmit={handleSubmit} className="edit-form">
+            <label>Game:
                 <input
                     type="text"
                     placeholder="Search game..."
@@ -110,6 +111,7 @@ function EditPost() {
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="searchInput"
                 />
+                </label>
                 <button type="button" onClick={fetchGames} disabled={loading || !searchTerm} className="createButton">
                     Search Games
                 </button>
@@ -130,13 +132,6 @@ function EditPost() {
                         <img src={post.gameImage} alt="Selected game" className="game-image"/>
                     </div>
                 )}
-                <textarea
-                    name="content"
-                    value={post.content}
-                    onChange={handleChange}
-                    required
-                    className="comments-textarea"
-                />
                 <label>Hop On Time:
                     <input
                         type="time"
@@ -144,9 +139,19 @@ function EditPost() {
                         value={post.displayTime}
                         onChange={handleChange}
                         required
-                        className="searchInput"
+                        className="comments-textarea"
                     />
                 </label>
+                 <label>Additional Details:
+                <textarea
+                    name="content"
+                    value={post.content}
+                    onChange={handleChange}
+                    required
+                    className="comments-textarea"
+                />
+                </label>
+                
                 <button type="submit" className="createButton">Update Post</button>
             </form>
         </div>
