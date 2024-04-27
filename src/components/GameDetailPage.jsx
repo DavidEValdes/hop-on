@@ -25,7 +25,7 @@ const GameDetailPage = () => {
     }, [gameSlug]);
 
     if (!game) {
-        return <div className="loading">Loading...</div>;
+        return <h2>Loading...</h2>;
     }
 
     return (

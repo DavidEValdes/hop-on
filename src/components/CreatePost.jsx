@@ -163,8 +163,11 @@ const CreatePost = () => {
                         value={selectedTime}
                         onChange={(e) => setSelectedTime(e.target.value)}
                         required
+                        style={{ marginBottom: '-5px' }}
                     />
                 </label>
+                <p style={{ marginBottom: '8px' }}className="createPostDate"><small>Please Enter Time in "00:00 AM/PM" Format</small></p>
+
                 <textarea
                     placeholder="Additional Details"
                     value={content}

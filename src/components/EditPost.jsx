@@ -8,9 +8,10 @@ const apiKey = import.meta.env.VITE_RAWG_API_KEY;
 function EditPost() {
     const { postId } = useParams();
     const navigate = useNavigate();
-    const [post, setPost] = useState({ title: '', content: '', game: '', gameImage: '', displayTime: '' });
+    const [post, setPost] = useState(null); // Initialize post state to null
     const [games, setGames] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [postLoading, setPostLoading] = useState(true); // New loading state for post
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedGame, setSelectedGame] = useState('');
 
@@ -19,6 +20,7 @@ function EditPost() {
     }, [postId]);
 
     const fetchPostDetails = async () => {
+        setPostLoading(true); // Start loading
         const { data, error } = await supabase
             .from('posts')
             .select('*')
@@ -39,6 +41,7 @@ function EditPost() {
             setSearchTerm(data.game);
             setSelectedGame(data.game);
         }
+        setPostLoading(false); // Stop loading
     };
 
     const fetchGames = useCallback(async () => {
@@ -99,18 +102,22 @@ function EditPost() {
         }
     };
 
+    if (postLoading) {
+        return <h2>Loading...</h2>;
+    }
+
     return (
         <div className="edit-post-container">
             <h1>Edit Post</h1>
             <form onSubmit={handleSubmit} className="edit-form">
-            <label>Game:
-                <input
-                    type="text"
-                    placeholder="Search game..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="searchInput"
-                />
+                <label>Game:
+                    <input
+                        type="text"
+                        placeholder="Search game..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="searchInput"
+                    />
                 </label>
                 <button type="button" onClick={fetchGames} disabled={loading || !searchTerm} className="createButton">
                     Search Games
@@ -142,16 +149,15 @@ function EditPost() {
                         className="comments-textarea"
                     />
                 </label>
-                 <label>Additional Details:
-                <textarea
-                    name="content"
-                    value={post.content}
-                    onChange={handleChange}
-                    required
-                    className="comments-textarea"
-                />
+                <label>Additional Details:
+                    <textarea
+                        name="content"
+                        value={post.content}
+                        onChange={handleChange}
+                        required
+                        className="comments-textarea"
+                    />
                 </label>
-                
                 <button type="submit" className="createButton">Update Post</button>
             </form>
         </div>

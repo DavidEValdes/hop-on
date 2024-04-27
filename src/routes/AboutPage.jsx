@@ -30,7 +30,7 @@ const AboutPage = () => {
         <li><strong>Dynamic Community:</strong> Join a lively community that’s ready to play. Meet friends, challenge rivals, and enjoy a friendly environment.</li>
         
       </ul>
-      <h3>Jump Right In!</h3>
+      <h3>Hop Right In!</h3>
       <p>
         Are you ready to hop on your next gaming adventure? Sign up now, post your first game session, or just explore what others are playing. At Hop On..., your next game is just a hop, skip, and a click away!
       </p>

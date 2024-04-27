@@ -682,9 +682,9 @@ h1 {
   color: var(--primary-color);
 }
 
-.createPostDate{
-  margin-top: -15px;;
-  font-size:0.8rem;
+.createPostDate {
+  margin-top: -15px;
+  font-size: 10px;;
 }
 
 
@@ -699,7 +699,7 @@ h1 {
 .create-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 25px;
   background: var(--background-color);
   padding: 30px;
   border-radius: var(--border-radius);
@@ -741,7 +741,9 @@ h1 {
 }
 
 
-
+.createPostDate small {
+  font-size: .9rem;  
+}
 
 
 
