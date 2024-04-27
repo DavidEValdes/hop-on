@@ -149,6 +149,7 @@ function EditPost() {
                         className="comments-textarea"
                     />
                 </label>
+                <p style={{ marginBottom: '8px' }}className="createPostDate"><small>Please Enter Time in "00:00 AM/PM" Format</small></p>
                 <label>Additional Details:
                     <textarea
                         name="content"
