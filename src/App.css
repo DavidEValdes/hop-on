@@ -48,27 +48,7 @@ body {
   color: var(--text-color);
   padding: 20px;
   overflow-y: auto;
-  position: fixed; /* Keeps the sidebar fixed at its position */
-  top: 0; /* Align top of sidebar with top of viewport */
-  left: 0; /* Align left of sidebar with left of viewport */
 }
-
-/* Ensures appropriate responsiveness */
-@media (max-width: 720px) {
-  .App-sidebar {
-    width: 100%; /* Full width for smaller screens */
-    position: relative; /* Sidebar flows with content on small screens */
-    height: auto; /* Height matches content */
-    padding: 10px; /* Reduced padding */
-  }
-
-  .App-content {
-    margin-left: 0; /* No margin needed when sidebar is full width */
-    width: 100%; /* Full width for content area */
-  }
-}
-
-
 
 .Header {
   display: flex;
@@ -376,13 +356,14 @@ button, .menu-link {
 
   
 }
+
+/* Games Page Container */
 .gamesContainer {
-  width: calc(100% - 250px); /* Adjust width to account for sidebar */
-  margin-left: 250px; /* Offset by the width of the sidebar */
-  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 20px;
+  color: #ffffff;
 }
 
 /* Title for Games Page */
