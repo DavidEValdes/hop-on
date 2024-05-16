@@ -11,23 +11,19 @@
   --shadow-heavy: 0 6px 15px rgba(0, 0, 0, 0.25); 
 }
 
-html {
+html, body {
   height: 100%;
-  background: var(--background-color); /* Dark blue */
-}
-
-body {
-  font-family: var(--font-family);
-  color: var(--text-color);
   margin: 0;
   padding: 0;
+  width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--background-color); /* Dark blue */
+  font-family: var(--font-family);
+  color: var(--text-color);
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
-  min-height: 100vh; 
-  overflow-x: hidden;
-  background: var(--background-color); /* Dark blue */
 }
 
 .App {
@@ -35,7 +31,6 @@ body {
   flex-direction: row;
   width: 100%;
   flex-grow: 1; 
-  background: var(--background-color); /* Dark blue */
 }
 
 .App-sidebar {
@@ -96,7 +91,6 @@ body {
   flex-grow: 1;
   padding: 20px;
   overflow-y: auto;
-  
   width: calc(100% - 250px);
 }
 
@@ -130,6 +124,11 @@ body {
   width: 100%;
   overflow: hidden;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.postCard:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-heavy);
 }
 
 .postDetails {
@@ -183,12 +182,6 @@ body {
   box-sizing: border-box; /* Include padding and border in the element's total width */
 }
 
-.postCard:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-heavy);
-}
-
-
 .postImage {
   width: 100px; /* Fixed width */
   height: 100px; /* Fixed height */
@@ -196,8 +189,6 @@ body {
   border-radius: var(--border-radius);
   align-self: flex-start; /* Aligns the image to the top of the container */
 }
-
-
 
 .post-page {
   max-width: 800px;
@@ -268,6 +259,15 @@ body {
   border: 1px solid #3a3d42; /* Subtle border to enhance visibility */
 }
 
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between; /* Aligns the buttons to the left and right */
+  align-items: center; /* Centers the buttons vertically */
+  margin-top: 20px;
+}
+
 button {
   background-color: var(--accent-color);
   color: var(--primary-color);
@@ -284,21 +284,61 @@ button:hover {
   color: black;
 }
 
-/* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
-  .post-title, .post-content, .post-upvotes {
-    font-size: 1rem;
+  .post-page {
+    padding: 10px;
+  }
+
+  .post-game, .post-display-time, .post-title,  {
+    font-size: 1.5rem;
+  }
+
+  .postContent {
+    padding: 20px;
+    padding-top: 30px;
+  }
+
+  .button-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .button-container button, .view-game-details-button {
+    width: 100%;
+    margin: 5px 0;
+    text-align: center;
+  }
+
+  .Header-title {
+    font-size: 1.5rem;
+  }
+
+  .Logo {
+    width: 40px;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .gamesList {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-.upvoteButton {
-  background-color: var(--accent-color); 
-  color: var(--primary-color);
-  border: none;
-  padding: 6px 12px;
-  border-radius: var(--border-radius);
-  cursor: pointer;
-  margin-top: 10px;
+@media (max-width: 480px) {
+  .post-game {
+    font-size: 1.8rem;
+  }
+
+  .post-display-time {
+    font-size: 1.2rem;
+  }
+
+  .gamesList {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 720px) {
@@ -310,29 +350,35 @@ button:hover {
     width: 100%;
     padding: 10px;
   }
+
+  .postCard {
+    flex-direction: column; /* Stack elements vertically on smaller screens */
+  }
+
+  .postImage {
+    width: 100px; /* Fixed width for smaller screens */
+    height: 100px; /* Fixed height for smaller screens */
+    object-fit: cover; /* Ensures the image covers the designated area without distortion */
+    margin-top: 10px; /* Space between text and image */
+  }
+
+  .postDetails {
+    order: 2; /* Text content goes below the image */
+  }
+
+  .postHeader {
+    flex-direction: row; /* Align game and title in a row on smaller screens */
+  }
 }
 
-@media (max-width: 480px) {
-  .Header-title {
-    font-size: 1.5rem;
-  }
-
-  .Logo {
-    width: 40px;
-  }
-
-  .postTitle, .postContent, .postGame {
-    white-space: normal;
-  }
-
-  .toolbar {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .upvoteButton {
-    padding: 4px 8px;
-  }
+.upvoteButton {
+  background-color: var(--accent-color); 
+  color: var(--primary-color);
+  border: none;
+  padding: 6px 12px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  margin-top: 10px;
 }
 
 button, .menu-link {
@@ -364,28 +410,24 @@ button, .menu-link {
   padding: 0;
 }
 
-/* Adjust grid for medium screens */
 @media (max-width: 1200px) {
   .gamesList {
     grid-template-columns: repeat(4, 1fr); /* Adjust to 4 columns on medium screens */
   }
 }
 
-/* Adjust grid for small screens */
 @media (max-width: 992px) {
   .gamesList {
     grid-template-columns: repeat(3, 1fr); /* Adjust to 3 columns on small screens */
   }
 }
 
-/* Adjust grid for extra small screens */
 @media (max-width: 768px) {
   .gamesList {
     grid-template-columns: repeat(2, 1fr); /* Adjust to 2 columns on extra small screens */
   }
 }
 
-/* Adjust grid for very small screens */
 @media (max-width: 480px) {
   .gamesList {
     grid-template-columns: 1fr; /* Single column layout on very small screens */
@@ -441,7 +483,6 @@ button, .menu-link {
   text-align: center;
 }
 
-/* CSS for Game Title */
 .gameTitle {
   text-align: center; /* Center the text horizontally */
 }
@@ -590,13 +631,6 @@ button, .menu-link {
 
   .game-title {
     font-size: 1.8rem;
-  }
-}
-
-/* Adjustments for smaller screens */
-@media (max-width: 720px) {
-  .gamesList {
-    grid-template-columns: .9fr; /* Only one column on smaller screens */
   }
 }
 
@@ -799,82 +833,55 @@ h1 {
   transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
 }
 
-@media (max-width: 720px) {
-  .postCard {
-    flex-direction: column; /* Stack elements vertically on smaller screens */
-  }
-
-  .postImage {
-    width: 100px; /* Fixed width for smaller screens */
-    height: 100px; /* Fixed height for smaller screens */
-    object-fit: cover; /* Ensures the image covers the designated area without distortion */
-    margin-top: 10px; /* Space between text and image */
-  }
+.create-post-dropdown, .sortDropdown {
+  width: 300px;
+  padding: 10px;
+  margin: 20px auto; /* Centers the dropdown and adds spacing */
+  border: 1px solid var(--secondary-color);
+  border-radius: var(--border-radius);
+  background: white;
+  color: black;
+  font-size: 1rem;
+  display: block; /* Ensures the dropdown is treated as a block element for centering */
 }
 
-@media (max-width: 720px) {
-  .postCard {
-    flex-direction: column; /* Stack elements vertically on smaller screens */
-  }
-
-  .postImage {
-    width: 100px; /* Fixed width for smaller screens */
-    height: 100px; /* Fixed height for smaller screens */
-    object-fit: cover; /* Ensures the image covers the designated area without distortion */
-    margin-top: 10px; /* Space between text and image */
-  }
-
-  .postDetails {
-    order: 2; /* Text content goes below the image */
-  }
-
-  .postHeader {
-    flex-direction: row; /* Align game and title in a row on smaller screens */
-  }
+.search-games-button {
+  margin-top: 20px; /* Adds spacing above the button */
 }
 
-.post-game {
-  font-size: 2.0rem;
+.create-post-container h1 {
+  font-size: 2rem; /* Larger font size for header */
+  color: var(--accent-color); /* Use your theme's accent color */
+  margin-bottom: 10px; /* Space below the header */
 }
 
-.postDisplayTime {
-  font-size: 1.5rem;
+.create-post-container p {
+  font-size: 1.2rem; /* Comfortable reading size */
+  color: var(--text-color); /* Standard text color */
+  margin-bottom: 20px; /* Space below paragraph for separation */
 }
 
-.postContent {
-  position: relative; /* Needed for absolute positioning of the pseudo-element */
-  background: #f0f0f0; /* Light grey background */
-  font-size: 1rem; /* Set font size for readability */
-  color: #333333; /* Dark grey color for text */
-  padding: 30px; /* Increased top padding to accommodate label */
-  padding-top: 40px; /* Additional top padding to create space below the label */
-  margin: 10px 0; /* Margin for spacing above and below */
-  border-radius: 8px; /* Rounded corners for aesthetics */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* More apparent shadow for depth */
-  line-height: 1.5; /* Line height for better readability */
-  word-wrap: break-word; /* Ensure long words do not overflow */
-  overflow: hidden; /* Hide overflow */
-  text-align: left; /* Align text to the left */
-  display: block; /* Block display to occupy full width */
+.create-post-container ol {
+  padding-left: 20px; /* Align text nicely within container */
+  counter-reset: step-counter; /* Create a counter for list items */
 }
 
-.postContent::before {
-  content: "Additional details:";
-  position: absolute;
-  top: 10px; /* Positioning from the top inside the box */
-  left: 20px; /* Positioning from the left inside the box */
-  font-size: 0.9rem; /* Slightly smaller font size than the content for differentiation */
-  color: #666666; /* Slightly lighter color for the label */
-  font-weight: bold; /* Bold text to make it stand out */
+.create-post-container li {
+  counter-increment: step-counter; /* Increase counter for each item */
+  margin-bottom: 10px; /* Space between items */
+  font-size: 1rem; /* Standard font size for list items */
+  line-height: 1.6; /* Adequate line spacing for readability */
+  list-style-type: none; /* Remove default list styling */
+  position: relative; /* Allows absolute positioning for pseudo-elements */
+  padding-left: 30px; /* Space for custom numbering */
 }
 
-/* Responsive adjustments for smaller screens */
-@media (max-width: 720px) {
-  .postContent {
-    padding: 20px; /* Adjusted padding on smaller screens */
-    padding-top: 30px; /* Maintain ample space below the label on smaller screens */
-    font-size: 0.9rem; /* Adjust font size for smaller screens */
-  }
+.create-post-container li:before {
+  content: counter(step-counter) '. '; /* Display the counter before the text */
+  position: absolute; /* Position it absolutely within the li */
+  left: 0; /* Position it at the very left */
+  font-weight: bold; /* Make the numbers bold */
+  color: var(--accent-color); /* Color of the numbers */
 }
 
 .postMeta, .commentsMeta {
@@ -946,55 +953,4 @@ h1 {
   background-image: linear-gradient(to right, #e8e8ed, #a0efff); /* Inverted lighter gradient for hover effect */
   color: #20232a; /* Maintaining dark text for readability */
   box-shadow: var(--shadow-heavy);
-}
-
-.create-post-dropdown, .sortDropdown {
-  width: 300px;
-  padding: 10px;
-  margin: 20px auto; /* Centers the dropdown and adds spacing */
-  border: 1px solid var(--secondary-color);
-  border-radius: var(--border-radius);
-  background: white;
-  color: black;
-  font-size: 1rem;
-  display: block; /* Ensures the dropdown is treated as a block element for centering */
-}
-
-.search-games-button {
-  margin-top: 20px; /* Adds spacing above the button */
-}
-
-.create-post-container h1 {
-  font-size: 2rem; /* Larger font size for header */
-  color: var(--accent-color); /* Use your theme's accent color */
-  margin-bottom: 10px; /* Space below the header */
-}
-
-.create-post-container p {
-  font-size: 1.2rem; /* Comfortable reading size */
-  color: var(--text-color); /* Standard text color */
-  margin-bottom: 20px; /* Space below paragraph for separation */
-}
-
-.create-post-container ol {
-  padding-left: 20px; /* Align text nicely within container */
-  counter-reset: step-counter; /* Create a counter for list items */
-}
-
-.create-post-container li {
-  counter-increment: step-counter; /* Increase counter for each item */
-  margin-bottom: 10px; /* Space between items */
-  font-size: 1rem; /* Standard font size for list items */
-  line-height: 1.6; /* Adequate line spacing for readability */
-  list-style-type: none; /* Remove default list styling */
-  position: relative; /* Allows absolute positioning for pseudo-elements */
-  padding-left: 30px; /* Space for custom numbering */
-}
-
-.create-post-container li:before {
-  content: counter(step-counter) '. '; /* Display the counter before the text */
-  position: absolute; /* Position it absolutely within the li */
-  left: 0; /* Position it at the very left */
-  font-weight: bold; /* Make the numbers bold */
-  color: var(--accent-color); /* Color of the numbers */
 }
