@@ -107,7 +107,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
- 
 }
 
 .toolbar {
@@ -159,11 +158,6 @@ body {
   border: 1px solid #3a3d42; /* Subtle border to match the upvotes display */
 }
 
-
-
-
-
-
 .postHeader {
   display: flex;
   flex-direction: column;
@@ -194,13 +188,17 @@ body {
   box-shadow: var(--shadow-heavy);
 }
 
+
 .postImage {
-  width: 100px;
-  height: 100px;
+  width: 100px; /* Fixed width */
+  height: 100px; /* Fixed height */
   object-fit: cover; /* Ensures the image covers the designated area without distortion */
   border-radius: var(--border-radius);
   align-self: flex-start; /* Aligns the image to the top of the container */
 }
+
+
+
 .post-page {
   max-width: 800px;
   margin: 20px auto;
@@ -211,10 +209,9 @@ body {
   box-shadow: var(--shadow-light);
 }
 
-
-.post-game,.post-display-time {
+.post-game, .post-display-time {
   color: #ffffff;
-  font-size:2rem;
+  font-size: 2rem;
 }
 
 .post-title {
@@ -232,27 +229,31 @@ body {
   margin-bottom: 20px;
 }
 
-.post-content {
-  position: relative;
-  background: #2c2f33;
-  font-size:1.3rem;
-  color: #e0e0e0;
-  padding: 15px;
+.postContent {
+  position: relative; /* Needed for absolute positioning of the pseudo-element */
+  background: #f0f0f0; /* Light grey background */
+  font-size: 1rem; /* Set font size for readability */
+  color: #333333; /* Dark grey color for text */
+  padding: 30px; /* Increased top padding to accommodate label */
   padding-top: 40px; /* Additional top padding to create space below the label */
-  border-radius: 10px;
-  margin: 20px 0;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  text-align: center;
+  margin: 10px 0; /* Margin for spacing above and below */
+  border-radius: 8px; /* Rounded corners for aesthetics */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* More apparent shadow for depth */
+  line-height: 1.5; /* Line height for better readability */
+  word-wrap: break-word; /* Ensure long words do not overflow */
+  overflow: hidden; /* Hide overflow */
+  text-align: left; /* Align text to the left */
+  display: block; /* Block display to occupy full width */
 }
 
-.post-content::before {
+.postContent::before {
   content: "Additional details:";
   position: absolute;
-  top: 10px;
-  left: 20px;
-  font-size: 0.9rem;
-  color: #e0e0e0;
-  font-weight: bold;
+  top: 10px; /* Positioning from the top inside the box */
+  left: 20px; /* Positioning from the left inside the box */
+  font-size: 0.9rem; /* Slightly smaller font size than the content for differentiation */
+  color: #666666; /* Slightly lighter color for the label */
+  font-weight: bold; /* Bold text to make it stand out */
 }
 
 .post-upvotes {
@@ -282,13 +283,13 @@ button:hover {
   background-color: white;
   color: black;
 }
+
 /* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
   .post-title, .post-content, .post-upvotes {
     font-size: 1rem;
   }
 }
-
 
 .upvoteButton {
   background-color: var(--accent-color); 
@@ -300,11 +301,7 @@ button:hover {
   margin-top: 10px;
 }
 
-
-
 @media (max-width: 720px) {
-
-  
   .App {
     flex-direction: column;
   }
@@ -313,15 +310,9 @@ button:hover {
     width: 100%;
     padding: 10px;
   }
-
-  
 }
 
-
-
 @media (max-width: 480px) {
-
-  
   .Header-title {
     font-size: 1.5rem;
   }
@@ -332,7 +323,6 @@ button:hover {
 
   .postTitle, .postContent, .postGame {
     white-space: normal;
-    
   }
 
   .toolbar {
@@ -348,8 +338,6 @@ button:hover {
 button, .menu-link {
   min-height: 44px;
   padding: 8px 12px;
-
-  
 }
 
 /* Games Page Container */
@@ -404,8 +392,6 @@ button, .menu-link {
   }
 }
 
-
-
 /* Individual Game Card Styling */
 .gameCard {
   display: flex;
@@ -433,6 +419,7 @@ button, .menu-link {
   object-fit: cover; /* Ensures the image covers the designated area without distortion */
   border-radius: var(--border-radius); /* Rounds the corners of the images */
 }
+
 /* Styling for Game Image and Title */
 .gameLink {
   text-decoration: none;
@@ -480,10 +467,11 @@ button, .menu-link {
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Increased shadow on hover for depth */
 }
 
-.notAvailable{
+.notAvailable {
   font-style: italic;
   color: #bbbbbb; /* Lighter text for 'N/A' to indicate less importance */
 }
+
 .aboutContainer {
   max-width: 800px;
   padding: 20px;
@@ -494,7 +482,6 @@ button, .menu-link {
   box-shadow: var(--shadow-light);
   text-align: center;
 }
-
 
 .aboutContainer p {
   font-size: 16px;
@@ -508,13 +495,13 @@ button, .menu-link {
   border-radius: var(--border-radius);
   border: 1px solid var(--secondary-color);
 }
+
 .searchInput {
   padding: 10px;
   margin: 10px;
   border-radius: var(--border-radius);
   border: 1px solid var(--secondary-color);
 }
-
 
 .pagination {
   display: flex;
@@ -529,19 +516,18 @@ button, .menu-link {
   margin: 0 10px;
   border-radius: var(--border-radius);
   border: none;
-  
   color: white;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
-
-.detail-page{
+.detail-page {
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.15) 100%);
   padding: 20px; /* Adds padding around the content for better spacing */
   margin-top: 20px; /* Optional: Adds spacing above the list */
   border-radius: var(--border-radius); 
 }
+
 .game-detail-container {
   max-width: 800px;
   margin: 20px auto;
@@ -607,9 +593,6 @@ button, .menu-link {
   }
 }
 
-
-
-
 /* Adjustments for smaller screens */
 @media (max-width: 720px) {
   .gamesList {
@@ -617,14 +600,11 @@ button, .menu-link {
   }
 }
 
-
-
 .edit-post-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 50px;
-  
 }
 
 .edit-form {
@@ -677,10 +657,8 @@ h1 {
 
 .createPostDate {
   margin-top: -15px;
-  font-size: 10px;;
+  font-size: 10px;
 }
-
-
 
 .create-post-container {
   display: flex;
@@ -733,12 +711,9 @@ h1 {
   background-color: var(--hover-color);
 }
 
-
 .createPostDate small {
-  font-size: .9rem;  
+  font-size: 0.9rem;  
 }
-
-
 
 .comments-container {
   width: 100%;
@@ -824,32 +799,28 @@ h1 {
   transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
 }
 
-
-
-
-
 @media (max-width: 720px) {
   .postCard {
     flex-direction: column; /* Stack elements vertically on smaller screens */
   }
 
   .postImage {
-    width: 100%; /* Full width images on small screens */
-    height: auto; /* Maintain aspect ratio */
+    width: 100px; /* Fixed width for smaller screens */
+    height: 100px; /* Fixed height for smaller screens */
+    object-fit: cover; /* Ensures the image covers the designated area without distortion */
     margin-top: 10px; /* Space between text and image */
   }
 }
 
-
-
 @media (max-width: 720px) {
   .postCard {
     flex-direction: column; /* Stack elements vertically on smaller screens */
   }
 
   .postImage {
-    width: 100%; /* Full width images on small screens */
-    height: auto; /* Maintain aspect ratio */
+    width: 100px; /* Fixed width for smaller screens */
+    height: 100px; /* Fixed height for smaller screens */
+    object-fit: cover; /* Ensures the image covers the designated area without distortion */
     margin-top: 10px; /* Space between text and image */
   }
 
@@ -862,21 +833,19 @@ h1 {
   }
 }
 
-.post-game{
-  font-size:2.0rem;
+.post-game {
+  font-size: 2.0rem;
 }
 
-
-.postDisplayTime{
-  font-size:1.5rem;
+.postDisplayTime {
+  font-size: 1.5rem;
 }
-
 
 .postContent {
   position: relative; /* Needed for absolute positioning of the pseudo-element */
+  background: #f0f0f0; /* Light grey background */
   font-size: 1rem; /* Set font size for readability */
   color: #333333; /* Dark grey color for text */
-  background-color: #f0f0f0; /* Light grey background */
   padding: 30px; /* Increased top padding to accommodate label */
   padding-top: 40px; /* Additional top padding to create space below the label */
   margin: 10px 0; /* Margin for spacing above and below */
@@ -907,6 +876,7 @@ h1 {
     font-size: 0.9rem; /* Adjust font size for smaller screens */
   }
 }
+
 .postMeta, .commentsMeta {
   display: flex;
   align-items: center;
@@ -937,7 +907,6 @@ h1 {
 .postMeta p:hover, .commentsMeta p:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
 }
-
 
 .postDetails span {
   color: black; /* Using the color defined in the root */
@@ -979,8 +948,6 @@ h1 {
   box-shadow: var(--shadow-heavy);
 }
 
-
-
 .create-post-dropdown, .sortDropdown {
   width: 300px;
   padding: 10px;
@@ -997,39 +964,37 @@ h1 {
   margin-top: 20px; /* Adds spacing above the button */
 }
 
-
-
 .create-post-container h1 {
-    font-size: 2rem; /* Larger font size for header */
-    color: var(--accent-color); /* Use your theme's accent color */
-    margin-bottom: 10px; /* Space below the header */
+  font-size: 2rem; /* Larger font size for header */
+  color: var(--accent-color); /* Use your theme's accent color */
+  margin-bottom: 10px; /* Space below the header */
 }
 
 .create-post-container p {
-    font-size: 1.2rem; /* Comfortable reading size */
-    color: var(--text-color); /* Standard text color */
-    margin-bottom: 20px; /* Space below paragraph for separation */
+  font-size: 1.2rem; /* Comfortable reading size */
+  color: var(--text-color); /* Standard text color */
+  margin-bottom: 20px; /* Space below paragraph for separation */
 }
 
 .create-post-container ol {
-    padding-left: 20px; /* Align text nicely within container */
-    counter-reset: step-counter; /* Create a counter for list items */
+  padding-left: 20px; /* Align text nicely within container */
+  counter-reset: step-counter; /* Create a counter for list items */
 }
 
 .create-post-container li {
-    counter-increment: step-counter; /* Increase counter for each item */
-    margin-bottom: 10px; /* Space between items */
-    font-size: 1rem; /* Standard font size for list items */
-    line-height: 1.6; /* Adequate line spacing for readability */
-    list-style-type: none; /* Remove default list styling */
-    position: relative; /* Allows absolute positioning for pseudo-elements */
-    padding-left: 30px; /* Space for custom numbering */
+  counter-increment: step-counter; /* Increase counter for each item */
+  margin-bottom: 10px; /* Space between items */
+  font-size: 1rem; /* Standard font size for list items */
+  line-height: 1.6; /* Adequate line spacing for readability */
+  list-style-type: none; /* Remove default list styling */
+  position: relative; /* Allows absolute positioning for pseudo-elements */
+  padding-left: 30px; /* Space for custom numbering */
 }
 
 .create-post-container li:before {
-    content: counter(step-counter) '. '; /* Display the counter before the text */
-    position: absolute; /* Position it absolutely within the li */
-    left: 0; /* Position it at the very left */
-    font-weight: bold; /* Make the numbers bold */
-    color: var(--accent-color); /* Color of the numbers */
+  content: counter(step-counter) '. '; /* Display the counter before the text */
+  position: absolute; /* Position it absolutely within the li */
+  left: 0; /* Position it at the very left */
+  font-weight: bold; /* Make the numbers bold */
+  color: var(--accent-color); /* Color of the numbers */
 }
