@@ -2,7 +2,7 @@
   --primary-color: #ffffff;
   --secondary-color: #4d59a9;
   --accent-color: #6ae5e1; 
-  --background-color: #20232a; 
+  --background-color: #171d29; 
   --text-color: #e0e0e0;
   --hover-color: white;
   --border-radius: 12px; 
@@ -13,12 +13,7 @@
 
 html {
   height: 100%;
-  background: linear-gradient(to right, 
-    rgba(106, 229, 225, 0.6) 0%, 
-    #20232a 20%, 
-    #20232a 80%, 
-    rgba(106, 229, 225, 0.6) 100%);
-    
+  background: var(--background-color); /* Dark blue */
 }
 
 body {
@@ -32,7 +27,7 @@ body {
   width: 100vw;
   min-height: 100vh; 
   overflow-x: hidden;
-  background: transparent; 
+  background: var(--background-color); /* Dark blue */
 }
 
 .App {
@@ -40,7 +35,7 @@ body {
   flex-direction: row;
   width: 100%;
   flex-grow: 1; 
-  background: transparent; 
+  background: var(--background-color); /* Dark blue */
 }
 
 .App-sidebar {
