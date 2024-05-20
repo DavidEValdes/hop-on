@@ -831,6 +831,7 @@ h1 {
   border-radius: var(--border-radius); /* Rounded corners */
   cursor: pointer; /* Pointer cursor on hover */
   transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+  background-color: var(--background-color);
 }
 
 .create-post-dropdown, .sortDropdown {

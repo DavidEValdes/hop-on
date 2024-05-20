@@ -132,10 +132,55 @@ const GamesPage = () => {
             ))}
           </ul>
           <span>
-      <button onClick={() => setCurrentPage(p => p > 1 ? p - 1 : 1)}>←</button>
-          <span>Page {currentPage} of {Math.ceil(totalGames / pageSize).toLocaleString()}</span>
-          <button onClick={() => setCurrentPage(p => p < Math.ceil(totalGames / pageSize) ? p + 1 : p)}>→</button>
-          </span>
+  <button 
+    onClick={() => setCurrentPage(p => p > 1 ? p - 1 : 1)}
+    style={{
+      backgroundColor: 'var(--background-color)',
+      color: 'black',
+      border: 'none',
+      padding: '10px 20px',
+      borderRadius: '12px',
+      cursor: 'pointer',
+      transition: 'background-color 0.3s, color 0.3s'
+    }}
+
+    //Just for fun I used event handlers to see how it works, always do css hover class changes as standard
+    onMouseEnter={(e) => {
+      e.target.style.backgroundColor = 'white';
+      e.target.style.color = 'black';
+    }}
+    onMouseLeave={(e) => {
+      e.target.style.backgroundColor = 'var(--background-color)';
+      e.target.style.color = 'black';
+    }}
+  >
+    ←
+  </button>
+  <span>Page {currentPage} of {Math.ceil(totalGames / pageSize).toLocaleString()}</span>
+  <button 
+    onClick={() => setCurrentPage(p => p < Math.ceil(totalGames / pageSize) ? p + 1 : p)}
+    style={{
+      backgroundColor: 'var(--background-color)',
+      color: 'black',
+      border: 'none',
+      padding: '10px 20px',
+      borderRadius: '12px',
+      cursor: 'pointer',
+      transition: 'background-color 0.3s, color 0.3s'
+    }}
+    onMouseEnter={(e) => {
+      e.target.style.backgroundColor = 'white';
+      e.target.style.color = 'black';
+    }}
+    onMouseLeave={(e) => {
+      e.target.style.backgroundColor = 'var(--background-color)';
+      e.target.style.color = 'black';
+    }}
+  >
+    →
+  </button>
+</span>
+
         </>
       )}
     </div>
