@@ -872,6 +872,8 @@ h1 {
   font-size: 1.2rem; /* Comfortable reading size */
   color: var(--text-color); /* Standard text color */
   margin-bottom: 20px; /* Space below paragraph for separation */
+  padding: 0 10px;
+      
 }
 
 .create-post-container ol {
