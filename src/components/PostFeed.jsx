@@ -84,6 +84,7 @@ function PostFeed() {
     return (
         <div className="feedContainer">
             <form onSubmit={handleFormSubmit} className="toolbar">
+                <span>
                 <input
                     type="text"
                     placeholder="Search by game..."
@@ -94,6 +95,7 @@ function PostFeed() {
                     <option value="created_at">Sort by Time</option>
                     <option value="upvotes">Sort by Upvotes</option>
                 </select>
+                </span>
                 <button type="button" onClick={handleCreatePost} className="createButton">Create Post</button>
             </form>
             {loading ? <h2>Loading...</h2> : (
