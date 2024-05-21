@@ -540,13 +540,13 @@ button, .menu-link {
   border-radius: var(--border-radius);
   border: 1px solid var(--secondary-color);
 }
-
 .searchInput {
   padding: 10px;
   margin: 10px;
   border-radius: var(--border-radius);
   border: 1px solid var(--secondary-color);
 }
+
 
 .pagination {
   display: flex;
@@ -830,12 +830,19 @@ h1 {
   margin-bottom: 20px;
 }
 
+/* Create Post Button Styling */
 .createButton {
-  border: 2px solid var(--accent-color); /* Light blue border */
-  border-radius: var(--border-radius); /* Rounded corners */
-  cursor: pointer; /* Pointer cursor on hover */
-  transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+  width: calc(100% - 40px); /* Adjust width to fit within margins */
+  padding: 10px;
+  border: 2px solid var(--accent-color);
+  border-radius: var(--border-radius);
   background-color: var(--background-color);
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  box-shadow: var(--shadow-light);
 }
 
 .create-post-dropdown, .sortDropdown {
