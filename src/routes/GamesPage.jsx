@@ -110,12 +110,11 @@ const GamesPage = () => {
     onClick={() => setCurrentPage(p => p > 1 ? p - 1 : 1)}
     style={{
       backgroundColor: 'var(--background-color)',
-      color: 'black',
       border: 'none',
       padding: '10px 20px',
       borderRadius: '12px',
       cursor: 'pointer',
-      transition: 'background-color 0.3s, color 0.3s'
+      
     }}
   >
     ←
@@ -125,12 +124,11 @@ const GamesPage = () => {
     onClick={() => setCurrentPage(p => p < Math.ceil(totalGames / pageSize) ? p + 1 : p)}
     style={{
       backgroundColor: 'var(--background-color)',
-      color: 'black',
       border: 'none',
       padding: '10px 20px',
       borderRadius: '12px',
       cursor: 'pointer',
-      transition: 'background-color 0.3s, color 0.3s'
+    
     }}
     
   >
