@@ -351,7 +351,7 @@ button:hover {
   .App-sidebar, .App-content {
     width: 100%;
     padding: 10px;
-    margin-left:-8px;
+    margin-left:-9px;
   }
 
   .postCard {
