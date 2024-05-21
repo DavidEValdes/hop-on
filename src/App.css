@@ -188,6 +188,7 @@ html, body {
   object-fit: cover; /* Ensures the image covers the designated area without distortion */
   border-radius: var(--border-radius);
   align-self: flex-start; /* Aligns the image to the top of the container */
+  
 }
 
 .post-page {
@@ -218,6 +219,7 @@ html, body {
   border-radius: var(--border-radius);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   margin-bottom: 20px;
+  justify-content: center; /* Center items horizontally */
 }
 
 .postContent {
@@ -360,6 +362,7 @@ button:hover {
     height: 100px; /* Fixed height for smaller screens */
     object-fit: cover; /* Ensures the image covers the designated area without distortion */
     margin-top: 10px; /* Space between text and image */
+    margin: 0 auto; /* Center image horizontally */
   }
 
   .postDetails {
@@ -954,4 +957,43 @@ h1 {
   background-image: linear-gradient(to right, #e8e8ed, #a0efff); /* Inverted lighter gradient for hover effect */
   color: #20232a; /* Maintaining dark text for readability */
   box-shadow: var(--shadow-heavy);
+}
+
+
+/* Ensure this is at the end of your CSS for specificity */
+@media (max-width: 480px) {
+  .postCard {
+    padding: 10px; /* Reduce padding for smaller screens */
+    margin: 10px 0; /* Smaller margin */
+    flex-direction: column; /* Stack elements vertically */
+    width: calc(100% - 20px); /* Ensure card fits within the screen */
+    box-sizing: border-box; /* Include padding in the width calculation */
+  }
+
+  .postGame {
+    font-size: 1.2rem; /* Reduce font size for smaller screens */
+  }
+
+  .postDisplayTime {
+    font-size: 1rem; /* Reduce font size for smaller screens */
+  }
+
+  .postContent {
+    font-size: 0.9rem; /* Smaller font size for content */
+  }
+
+  .postMeta {
+    flex-direction: column; /* Stack meta information vertically */
+    align-items: flex-start; /* Align items to the start */
+  }
+
+  .postMeta p, .commentsMeta p {
+    font-size: 0.8rem; /* Smaller font size for meta information */
+    margin-top: 10px;
+  }
+
+  .postDetails span {
+    font-size: 0.75rem; /* Smaller font size for date span */
+    margin-top: 20px;
+  }
 }
