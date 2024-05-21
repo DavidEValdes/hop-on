@@ -186,7 +186,7 @@ html, body {
   width: 100px; /* Fixed width */
   height: 100px; /* Fixed height */
   object-fit: cover; /* Ensures the image covers the designated area without distortion */
-  border-radius: var(--border-radius);
+  border-radius: 50%;
   align-self: flex-start; /* Aligns the image to the top of the container */
   
 }
@@ -833,6 +833,7 @@ h1 {
 /* Create Post Button Styling */
 .createButton {
   width: calc(100% - 40px); /* Adjust width to fit within margins */
+  margin-right:10px;
   padding: 10px;
   border: 2px solid var(--accent-color);
   border-radius: var(--border-radius);
@@ -1002,6 +1003,13 @@ h1 {
 
   .postDetails span {
     font-size: 0.75rem; /* Smaller font size for date span */
+    margin-top: 20px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .createButton {
     margin-top: 20px;
   }
 }
