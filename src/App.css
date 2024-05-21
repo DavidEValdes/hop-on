@@ -858,9 +858,7 @@ h1 {
   display: block; /* Ensures the dropdown is treated as a block element for centering */
 }
 
-.search-games-button {
-  margin-top: 20px; /* Adds spacing above the button */
-}
+
 
 .create-post-container h1 {
   font-size: 2rem; /* Larger font size for header */

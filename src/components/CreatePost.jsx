@@ -81,6 +81,17 @@ const CreatePost = () => {
 
     return (
         <div className="create-post-container">
+            <style>
+                {`
+                    .search-games-button {
+                        margin-top: 20px;
+                        color: black !important;
+                    }
+                    .create-games-button{
+                        color:black !important;
+                    }
+                `}
+            </style>
             <h1>Create a New Post</h1>
             <p>Please follow the steps below to create your post:</p>
             <ol>
@@ -174,7 +185,7 @@ const CreatePost = () => {
                     onChange={(e) => setContent(e.target.value)}
                     required
                 />
-                <button type="submit" className="search-games-button">Create Post</button>
+                <button type="submit" className="create-games-button">Create Post</button>
             </form>
         </div>
     );
