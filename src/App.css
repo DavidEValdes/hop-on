@@ -306,7 +306,6 @@ button:hover {
   }
 
   .button-container button, .view-game-details-button {
-    width: 100%;
     margin: 5px 0;
     text-align: center;
   }
@@ -813,7 +812,7 @@ h1 {
 .comments-button {
   padding: 10px 20px;
   background-color: var(--accent-color);
-  color: black;
+  color: black !important;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -1012,5 +1011,63 @@ h1 {
 @media (max-width: 768px) {
   .createButton {
     margin-top: 20px;
+  }
+}
+
+/* Base button styling for all action buttons */
+.edit-post-button,
+.delete-post-button,
+.upvote-post-button {
+  background-color: var(--accent-color);
+  color: black !important;
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, transform 0.3s;
+  box-shadow: var(--shadow-light);
+}
+
+/* Hover effect for action buttons */
+.edit-post-button:hover,
+.delete-post-button:hover,
+.upvote-post-button:hover {
+  background-color: var(--hover-color);
+  color: var(--background-color);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-heavy);
+}
+
+/* Specific styles for edit button */
+.edit-post-button {
+  background-color: var(--accent-color);
+}
+
+/* Specific styles for delete button */
+.delete-post-button {
+  background-color: #ff4d4d; /* Red color for delete */
+}
+
+/* Specific styles for upvote button */
+.upvote-post-button {
+  background-color: #9f87ff; /* Use secondary color for upvote */
+}
+
+/* Responsive styling for mobile devices */
+@media (max-width: 768px) {
+  .edit-post-button,
+  .delete-post-button,
+  .upvote-post-button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    margin: 5px 0; /* Space between buttons */
+    text-align: center;
+  }
+
+  .button-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
   }
 }

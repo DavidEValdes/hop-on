@@ -103,7 +103,7 @@ function PostPage() {
                                 View Game Details
                             </Link>
                         )}
-                        <p className="post-content">{post.content}</p>
+                        <p className="postContent">{post.content}</p>
                     </>
                 )}
             </div>
