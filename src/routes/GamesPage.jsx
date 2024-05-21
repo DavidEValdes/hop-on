@@ -117,16 +117,6 @@ const GamesPage = () => {
       cursor: 'pointer',
       transition: 'background-color 0.3s, color 0.3s'
     }}
-
-    //Just for fun I used event handlers to see how it works, always do css hover class changes as standard
-    onMouseEnter={(e) => {
-      e.target.style.backgroundColor = 'white';
-      e.target.style.color = 'black';
-    }}
-    onMouseLeave={(e) => {
-      e.target.style.backgroundColor = 'var(--background-color)';
-      e.target.style.color = 'black';
-    }}
   >
     ←
   </button>
@@ -142,14 +132,7 @@ const GamesPage = () => {
       cursor: 'pointer',
       transition: 'background-color 0.3s, color 0.3s'
     }}
-    onMouseEnter={(e) => {
-      e.target.style.backgroundColor = 'white';
-      e.target.style.color = 'black';
-    }}
-    onMouseLeave={(e) => {
-      e.target.style.backgroundColor = 'var(--background-color)';
-      e.target.style.color = 'black';
-    }}
+    
   >
     →
   </button>
