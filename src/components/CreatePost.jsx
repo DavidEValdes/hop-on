@@ -174,7 +174,7 @@ const CreatePost = () => {
                     onChange={(e) => setContent(e.target.value)}
                     required
                 />
-                <button type="submit" className="createButton">Create Post</button>
+                <button type="submit" className="search-games-button">Create Post</button>
             </form>
         </div>
     );
