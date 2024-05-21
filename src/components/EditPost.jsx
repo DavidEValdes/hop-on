@@ -108,6 +108,15 @@ function EditPost() {
 
     return (
         <div className="edit-post-container">
+            <style>
+                {`
+                    .search-games-button {
+                        margin-top: 20px;
+                        color: black !important;
+                    }
+                    
+                `}
+                </style>
             <h1>Edit Post</h1>
             <form onSubmit={handleSubmit} className="edit-form">
                 <label>Game:
@@ -119,7 +128,7 @@ function EditPost() {
                         className="searchInput"
                     />
                 </label>
-                <button type="button" onClick={fetchGames} disabled={loading || !searchTerm} className="createButton">
+                <button type="button" onClick={fetchGames} disabled={loading || !searchTerm} className="search-games-button">
                     Search Games
                 </button>
                 {games.length > 0 && !loading && (
@@ -159,7 +168,7 @@ function EditPost() {
                         className="comments-textarea"
                     />
                 </label>
-                <button type="submit" className="createButton">Update Post</button>
+                <button type="submit" className="search-games-button">Update Post</button>
             </form>
         </div>
     );
