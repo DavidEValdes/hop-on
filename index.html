@@ -5,9 +5,43 @@
     <link rel="icon" type="image/png" href="/src/assets/gamepad.png" /> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hop On...</title>
+    <style>
+      button {
+        background-color: var(--accent-color);
+        color: white !important; /* Ensure text color is white */
+        border: none;
+        padding: 10px 20px;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      button:hover,
+      button.button-active {
+        background-color: white;
+        color: black !important;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const buttons = document.querySelectorAll('button');
+
+        buttons.forEach(button => {
+          button.addEventListener('touchstart', () => {
+            button.classList.add('button-active');
+          });
+
+          button.addEventListener('touchend', () => {
+            setTimeout(() => {
+              button.classList.remove('button-active');
+            }, 1000); // Adjust the timeout to the desired duration
+          });
+        });
+      });
+    </script>
   </body>
 </html>
