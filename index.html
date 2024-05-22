@@ -8,7 +8,7 @@
     <style>
       button {
         background-color: var(--accent-color);
-        color: white !important; /* Ensure text color is white */
+       
         border: none;
         padding: 10px 20px;
         border-radius: 12px;
@@ -38,7 +38,7 @@
           button.addEventListener('touchend', () => {
             setTimeout(() => {
               button.classList.remove('button-active');
-            }, 1000); // Adjust the timeout to the desired duration
+            }, 200); // Adjust the timeout as needed (in milliseconds)
           });
         });
       });
