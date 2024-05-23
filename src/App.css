@@ -355,8 +355,13 @@ button:hover {
   }
 
   .postCard {
-    flex-direction: column; /* Stack elements vertically on smaller screens */
+    padding: 10px; /* Reduce padding for smaller screens */
+    margin: 10px 0; /* Smaller margin */
+    flex-direction: column; /* Stack elements vertically */
+    width: calc(100% - 30px); /* Ensure card fits within the screen */
+    box-sizing: border-box; /* Include padding in the width calculation */
   }
+
 
   .postImage {
     width: 100px; /* Fixed width for smaller screens */
@@ -976,7 +981,7 @@ h1 {
     padding: 10px; /* Reduce padding for smaller screens */
     margin: 10px 0; /* Smaller margin */
     flex-direction: column; /* Stack elements vertically */
-    width: calc(100% - 20px); /* Ensure card fits within the screen */
+    width: calc(100% - 30px); /* Ensure card fits within the screen */
     box-sizing: border-box; /* Include padding in the width calculation */
   }
 
@@ -1072,3 +1077,6 @@ h1 {
     gap: 10px;
   }
 }
+
+
+
