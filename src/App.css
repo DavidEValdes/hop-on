@@ -83,7 +83,6 @@ html, body {
 .menu-link:hover {
   background-color: rgba(255, 255, 255, 0.9); 
   color: #000000; 
-  transform: scale(1.05); 
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); 
 }
 
@@ -588,6 +587,7 @@ button, .menu-link {
   color: var(--text-color);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-light);
+  width: calc(100% - 80px);
   text-align: center;
 }
 
@@ -1082,3 +1082,10 @@ h1 {
 
 
 
+.button-white-text {
+  color: white !important; /* Ensure the text color stays white */
+}
+
+.button-white-text:hover {
+  color: white !important; /* Ensure the text color stays white on hover */
+}

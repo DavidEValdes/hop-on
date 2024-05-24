@@ -108,12 +108,11 @@ const GamesPage = () => {
       <span>
   <button 
     onClick={() => setCurrentPage(p => p > 1 ? p - 1 : 1)}
+    className="button-white-text"
     style={{
       backgroundColor: 'var(--background-color)',
       border: 'none',
-      padding: '10px 20px',
-      borderRadius: '12px',
-      cursor: 'pointer',
+      
       
     }}
   >
@@ -122,12 +121,11 @@ const GamesPage = () => {
   <span>Page {currentPage} of {Math.ceil(totalGames / pageSize).toLocaleString()}</span>
   <button 
     onClick={() => setCurrentPage(p => p < Math.ceil(totalGames / pageSize) ? p + 1 : p)}
+    className="button-white-text"
     style={{
       backgroundColor: 'var(--background-color)',
       border: 'none',
-      padding: '10px 20px',
-      borderRadius: '12px',
-      cursor: 'pointer',
+     
     
     }}
     
@@ -159,13 +157,12 @@ const GamesPage = () => {
           <span>
   <button 
     onClick={() => setCurrentPage(p => p > 1 ? p - 1 : 1)}
+    className="button-white-text"
     style={{
       backgroundColor: 'var(--background-color)',
     
       border: 'none',
-      padding: '10px 20px',
-      borderRadius: '12px',
-      cursor: 'pointer',
+      
       
     }}
 
@@ -176,13 +173,12 @@ const GamesPage = () => {
   <span>Page {currentPage} of {Math.ceil(totalGames / pageSize).toLocaleString()}</span>
   <button 
     onClick={() => setCurrentPage(p => p < Math.ceil(totalGames / pageSize) ? p + 1 : p)}
+    className="button-white-text"
     style={{
       backgroundColor: 'var(--background-color)',
       
       border: 'none',
-      padding: '10px 20px',
-      borderRadius: '12px',
-      cursor: 'pointer',
+   
       
     }}
     
