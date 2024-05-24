@@ -36,11 +36,6 @@ The following **additional** features are implemented:
 - [X] Browse all games with a games list, filters, and search bar in a separate games page, querying an external API to browse all games available using RAWG's API and database.
 - [X] About page explaining the site on a separate page with all of the features available to users
 
-## Video Walkthrough
- 
-![ezgif com-video-to-gif-converter copy](https://github.com/DavidEValdes/hop-on/assets/36570117/7114fda7-9bb4-4445-9bbd-b33eeee8b4cd)
-
-
 ## License
 
     Copyright [2024] [David Valdes]
