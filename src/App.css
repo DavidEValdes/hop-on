@@ -290,6 +290,7 @@ button:hover {
 @media (max-width: 768px) {
   .post-page {
     padding: 10px;
+    width: calc(100% - 60px);
   }
 
   .post-game, .post-display-time, .post-title,  {
@@ -343,7 +344,7 @@ button:hover {
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 800px) {
   .App {
     flex-direction: column;
   }
@@ -531,6 +532,7 @@ button, .menu-link {
   border-radius: 12px;
   box-shadow: var(--shadow-light);
   text-align: center;
+  width: calc(100% - 80px);
 }
 
 .aboutContainer p {
