@@ -2,7 +2,7 @@
 
 Submitted by: **David Valdes**
 
-This web app: **Hop On... is a dynamic web application designed to connect gamers around the world. It offers a community-driven platform where users can create posts about upcoming gaming sessions, find and join games, and interact through comments and upvotes. The app streamlines the process of scheduling game times, browsing game titles and details, and enhances user engagement with robust social features, making it easier for gamers to connect and hop on their next adventure together.**
+This web app: **Hop On... is a web application designed to connect gamers. It offers a platform where users can create posts about upcoming gaming sessions, find and join games, and interact through comments and upvotes. The app streamlines the process of scheduling game times, browsing game titles and details, and enhances user engagement with robust social features, making it easier for gamers to connect and hop on their next adventure together.**
 
 Time spent: **50** hours spent in total
 
