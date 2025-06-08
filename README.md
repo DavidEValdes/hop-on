@@ -6,7 +6,6 @@ This web app: **Hop On... is a web application designed to connect gamers. It of
 
 Time spent: **50** hours spent in total
 
-🔗 https://hop-on-gaming.vercel.app
 
 ## Required Features
 
