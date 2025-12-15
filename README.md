@@ -6,6 +6,9 @@ This web app: **Hop On... is a web application designed to connect gamers. It of
 
 Time spent: **50** hours spent in total
 
+## Video Walkthrough
+ 
+![ezgif com-video-to-gif-converter copy](https://github.com/DavidEValdes/hop-on/assets/36570117/7114fda7-9bb4-4445-9bbd-b33eeee8b4cd)
 
 ## Required Features
 
